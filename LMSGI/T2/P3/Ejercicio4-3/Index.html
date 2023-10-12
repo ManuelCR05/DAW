@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio4-3</title>
+</head>
+<body>
+    <h1>Encuenta al profesorado</h1>
+    
+    <p>
+
+        <b>por favor, si es usted docente responda a las cuestiones:</b>
+
+        <form action="">
+            <fieldset>
+                <legend>1. Información personal</legend>
+                <label for="nombreApellidos">Apellidos y nombre:</label>
+                <input type="text" id="nombreApellidos" size="40">
+                <br/>
+                <label for="">Sexo:</label>
+                <input type="radio" name="sexo">hombre
+                <input type="radio" name="sexo">mujer
+                <br/>
+                <label for="telefono">Télefono:</label>
+                <input type="text" id="telefono" size="8">
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" size="12">
+            </fieldset>
+            <br/>
+            <fieldset>
+                <legend>2. Datos profesionales</legend>
+                <label for="centroTrabajo">Centro de trabajo:</label>
+                <input type="text" id="centroTrabajo" size="24">
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" size="24">
+                <br/>
+                <label for="especialidad">Especialidad:</label>
+                <br/>
+                <select id="especialidad" size="4">
+                    <option value="valor1">Lengua y literatura</option>
+                    <option value="valor2">Matemáticas</option>
+                    <option value="valor3">Informática</option>
+                    <option value="valor4">Geografía e história</option>
+                </select>
+            </fieldset>
+            <br/>
+            <fieldset>
+                <legend>3. Por favor, facilítenos la siguiente información:</legend>
+                <label for="metodoLlegada">¿Cómo llegó hasta aquí?:</label>
+                <select id="metodoLlegada">
+                    <option value="valor1">Desde un buscador</option>
+                </select>
+                <br/>
+                <br/>
+                <label for="comentarios">Comentarios:</label>
+                <br/>
+                <textarea id="comentarios" cols="60" rows="5"></textarea>
+                <br/>
+                <br/>
+                <label for="">¿Desearía recibir más información sobre ... ?</label>
+                <br/>
+                <input type="checkbox"> Material audiovisual
+                <br/>
+                <input type="checkbox"> Textos electrónicos
+                <br/>
+                <input type="checkbox"> Libros de texto
+                <br/>
+                <br/>
+            </fieldset>
+            <hr/>
+            <center>
+                <input type="submit" value="enviar datos">
+                <input type="reset" value="borrar datos">
+            </center>
+
+        </form>
+
+    </p>
+</body>
+</html>

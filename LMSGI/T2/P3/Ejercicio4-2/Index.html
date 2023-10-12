@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio4-2</title>
+</head>
+<body>
+    <h1>INDUSTRIAS ACME. FORMULARIO DE PEDIDO</h1>
+
+    <p>
+
+        <form>
+
+            <b>Datos del Cliente:</b>
+            <br/>
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" id="correo" size="15">
+            <br/>
+            <label for="contraseña">Contraseña</label>
+            <input type="password" id="contraseña" size="6">
+            <br/>
+            (Longitud mnínima 6 caracteres)
+            <br/>
+            Tipo de Cliente
+            <input type="radio" name="cliente">Particular
+            <input type="radio" name="cliente">Asociación
+            <input type="radio" name="cliente">Empresa
+            <br/>
+            <br/>
+            <b>Datos de productos:</b>
+            <br/>
+            <select name="" id="" size="5">
+                <option value="AR001">AR001 Oro Reluciente</option>
+                <option value="AR002">AR002 Plata Pulida</option>
+                <option value="AR003">AR003 Bronce Reforzado</option>
+                <option value="EX001">EX001 Escudo</option>
+                <option value="EX002">EX002 Invisibilidad</option>
+            </select>
+            <br/>
+            <br/>
+            <b>Datos del envío:</b>
+            <br/>
+            <label for="direccion">Dirección</label>
+            <br/>
+            <input type="text" id="direccion" size="33">
+            <br/>
+            <label for="ciudad">Ciudad</label>
+            <br/>
+            <input type="text" id="ciudad" size="17">
+            <label for="codigoPostal">Código Postal</label>
+            <input type="text" id="codigoPostal" size="4">
+            <br/>
+            <br/>
+            <b>Datos bancarios:</b>
+            <br/>
+            <label for="entidad">Nombre de la Entidad</label>
+            <br/>
+            <input type="text" id="entidad" size="16">
+            <br/>
+            <label for="numCuenta">Nº de Cuenta</label>
+            <br/>
+            <input type="text" id="numCuenta" size="16">
+            <br/>
+            <br/>
+            <b>Información de interés:</b>
+            <br/>
+            <label for="">Cometarios</label>
+            <br/>
+            <textarea id="comtarios" cols="80" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
+            <br/>
+            <input type="checkbox"> Accepto recibir información publicitaria
+            <br/>
+            <br/>
+            <input type="submit" value="Enviar pedido">
+            <input type="reset" value="Cancelar">
+
+        </form>
+        
+    </p>
+</body>
+</html>
