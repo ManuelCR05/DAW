@@ -15,27 +15,27 @@
             <b>Datos del Cliente:</b>
             <br/>
             <label for="correo">Correo Electrónico</label>
-            <input type="email" id="correo" size="15">
+            <input type="email" id="correo" size="15" name="email">
             <br/>
             <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" size="6">
+            <input type="password" id="contraseña" size="6" name="contraseña">
             <br/>
             (Longitud mnínima 6 caracteres)
             <br/>
             Tipo de Cliente
-            <input id="particular" type="radio" name="cliente"><label for="particular">Particular</label>
-            <input id="asociacion" type="radio" name="cliente"><label for="asociacion">Asociación</label>
-            <input id="empresa" type="radio" name="cliente"><label for="empresa">Empresa</label>
+            <input id="particular" type="radio" name="cliente" value="particular"><label for="particular">Particular</label>
+            <input id="asociacion" type="radio" name="cliente" value="asociacion"><label for="asociacion">Asociación</label>
+            <input id="empresa" type="radio" name="cliente" value="empresa"><label for="empresa">Empresa</label>
             <br/>
             <br/>
             <b>Datos de productos:</b>
             <br/>
-            <select name="" id="" size="5">
-                <option value="AR001">AR001 Oro Reluciente</option>
-                <option value="AR002">AR002 Plata Pulida</option>
-                <option value="AR003">AR003 Bronce Reforzado</option>
-                <option value="EX001">EX001 Escudo</option>
-                <option value="EX002">EX002 Invisibilidad</option>
+            <select name="" size="5">
+                <option name="oro" value="AR001">AR001 Oro Reluciente</option>
+                <option name="plata" value="AR002">AR002 Plata Pulida</option>
+                <option name="bronce" value="AR003">AR003 Bronce Reforzado</option>
+                <option name="escudo" value="EX001">EX001 Escudo</option>
+                <option name="invisibilidad" value="EX002">EX002 Invisibilidad</option>
             </select>
             <br/>
             <br/>
@@ -43,33 +43,33 @@
             <br/>
             <label for="direccion">Dirección</label>
             <br/>
-            <input type="text" id="direccion" size="33">
+            <input type="text" id="direccion" size="33" name="direccion">
             <br/>
             <label for="ciudad">Ciudad</label>
             <br/>
-            <input type="text" id="ciudad" size="17">
+            <input type="text" id="ciudad" size="17" name="codigoPostal">
             <label for="codigoPostal">Código Postal</label>
-            <input type="text" id="codigoPostal" size="4">
+            <input type="text" id="codigoPostal" size="4" name="codigoPostal">
             <br/>
             <br/>
             <b>Datos bancarios:</b>
             <br/>
             <label for="entidad">Nombre de la Entidad</label>
             <br/>
-            <input type="text" id="entidad" size="16">
+            <input type="text" id="entidad" size="16" name="entidad">
             <br/>
             <label for="numCuenta">Nº de Cuenta</label>
             <br/>
-            <input type="text" id="numCuenta" size="16">
+            <input type="text" id="numCuenta" size="16" name="numCuenta">
             <br/>
             <br/>
             <b>Información de interés:</b>
             <br/>
-            <label for="">Cometarios</label>
+            <label for="comentarios">Cometarios</label>
             <br/>
-            <textarea id="comtarios" cols="80" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
+            <textarea name="comentarios" id="comentarios" cols="80" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
             <br/>
-            <input type="checkbox"> Accepto recibir información publicitaria
+            <input type="checkbox" name="infPublicitaria"> Accepto recibir información publicitaria
             <br/>
             <br/>
             <input type="submit" value="Enviar pedido">
