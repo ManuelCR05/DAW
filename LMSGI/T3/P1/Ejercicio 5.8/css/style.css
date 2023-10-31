@@ -1,0 +1,7 @@
+h3::first-letter {
+    font-size: 22px;
+}
+
+p::first-letter {
+    font-size: 18px;
+}

@@ -1,0 +1,10 @@
+body {
+    color: red;
+    border: 10px;
+    border: solid;
+    border-color: black;
+}
+
+p {
+    border: inherit;
+}
