@@ -1,0 +1,30 @@
+body {
+    background-color: aqua;
+    text-align: center;
+}
+
+.cavecera {
+    background-image: url(../img/paisaje.jpg);
+    border: solid 4px;
+    border-color: black;
+    border-radius: 15px;
+    padding: 2%;
+    height: 300px;
+}
+
+img {
+    opacity: 0,5;
+}
+
+h1 {
+    font-size: 60px;
+    margin: 30px;
+}
+
+i {
+    font-size: 30px;
+}
+
+a {
+    font-size: 20px;
+}
