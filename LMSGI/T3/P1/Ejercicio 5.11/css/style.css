@@ -72,15 +72,14 @@ hr {
 }
 
 
-ul {
-    margin: 0%;
-    padding: 0%;
-    list-style: none;
+.perfiles {
+    margin: 2% 30% 1% 30%;
 }
-  
-ul li {
-    display: inline; 
-    margin: 0% 10px; 
+
+.separadores {
+    width: 0.25%;
+    border: 3px solid;
+    border-radius: 5px;
 }
 
 .contenido {
