@@ -1,0 +1,108 @@
+
+h1 {
+    color:  #4444fc ;
+}
+
+ul {
+    list-style: none;
+    margin: 0%;
+}
+
+p{
+    color: #21318c;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 3%;
+}
+
+hr {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#menu {
+    background-color:  #141c84;
+    margin-bottom: 0%;
+    padding-top: 1%;
+}
+
+#opciones {
+    margin: 0%;
+    padding-bottom: 8px;
+}
+
+#opciones li {
+    background-color:  #21318c ;
+    color: white;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#opciones li, #izquierda li {
+    display: inline;
+}
+
+#contenido {
+    float: left;
+    margin-top: 0%;
+    border: 1px solid  #4444fc;
+    padding: 2%;
+    width: 95.87%;
+}
+
+#izquierda {
+    float: left;
+    width: 80%;
+}
+
+.TitleIzquierda {
+    background-color:  #f89105;
+    color:  #21318c;
+    padding: 10px;
+}
+
+#izquierda li {
+    color:  #a3bcef;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+#derecha {
+    float: left;
+    width: 20%;
+    background-color:  #ccdcfb;
+}
+
+.TitleDerecha {
+    background-color:  #a3bcef;
+    color:  #21318c;
+    padding: 10px;
+}
+
+#derecha ul {
+    padding-left: 2%;
+}
+
+#derecha li {
+    color:  #21318c;
+    margin: 3%;
+    padding-left: 0%;
+}
+
+#derecha li:hover {
+    background-color: #e4ecfb;
+    color: #141c84;
+}
+
+#categorias li, #enlaces li {
+    border-bottom: 1px solid #e4ecfb;
+}
+
+#pie {
+    clear: both;
+    color:  #a3bcef;
+    margin: 1%;
+    padding: 1%;
+}
