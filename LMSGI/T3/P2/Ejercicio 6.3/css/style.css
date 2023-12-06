@@ -1,0 +1,20 @@
+
+h1 {
+    text-align: center;
+}
+
+#contenedor {
+    background-color: aqua;
+    border: 1px solid blue;
+    float: left;
+}
+
+#texto {
+    float: left;
+    text-align: right;
+}
+
+#formulario {
+    float: left;
+    text-align: left;
+}

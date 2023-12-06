@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Ejercicio 6.3</title>
 </head>
 <body>
-    
+    <h1><strong>INDUSTRIAS ACME. FORMULARIO DE PEDIDO</strong></h1>
+
+    <div id="contenedor">
+        <div id="texto">
+            <form>
+                <p><strong>Datos del cliente:</strong></p>
+                
+                <label for="name">Nombre</label>
+                <br>
+                <label for="email">Correo Electrónico</label>
+                <br>
+                <label for="tipoCliente">Tipo de cliente</label>
+
+                <p><strong>Datos de los productos:</strong></p>
+
+                <label for="producto">Productos solicitado</label>
+
+                <p><strong>Datos de envío:</strong></p>
+
+                <label for="direcion">Dirección</label>
+                <br>
+                <label for="ciudad">Ciudad</label>
+                <br>
+                <label for="codPostal">Código Postal</label>
+
+                <p>Datos bancarios:</p>
+
+                <label for="nombreEntidad">Nombre de la entidad</label>
+                <br>
+                <label for="numCuenta">Número de Cuenta</label>
+
+                <p><strong>Otra información del pedido:</strong></p>
+
+                <label for="comentario">Comentarios</label>
+                <br>
+                <label for="infPublicitaria">Acepto recibir información publicitaria</label>
+            </form>
+        </div>
+
+        <div id="formulario">
+            <form>
+                <input type="text" id="name" name="nombreCliente">
+                <br>
+                <input type="email" id="email" name="correoElectronico">
+                <br>
+                <input type="radio" id="tipoCliente" name="TCliente">
+                <br>
+                <input type="radio" id="tipoCliente" name="TCliente">
+                <br>
+                <input type="radio" id="tipoCliente" name="TCliente">
+                <br>
+                <select name="TProducto" id="producto" multiple size="5">
+                    <option value="">AR001 Oro Reluciente</option>
+                    <option value="">AR002 Plata Pulida</option>
+                    <option value="">AR003 Bronce Reforzado</option>
+                    <option value="">EX001 Escudo</option>
+                    <option value="">EX002 Invisibilidad</option>
+                </select>
+                <br>
+                <input type="text" name="direcionDeEnvio" id="direcion">
+                <br>
+                <input type="text" name="ciudadDeEnvio" id="ciudad">
+                <br>
+                <input type="number" name="codigoPostal" id="codPostal">
+                <br>
+                <input type="text" name="NombreEntidadBancaria" id="nombreEntidad">
+                <br>
+                <input type="number" name="NumeroDeCuenta" id="numCuenta">
+                <br>
+                <textarea name="ComentariosDelPedido" id="comentario" cols="30" rows="10" placeholder="Escriba aquí sus comentarios..."></textarea>
+                <br>
+                <input type="checkbox" name="informacionPublicitaria" id="infPublicitaria">
+            </form>
+        </div>
+
+        <form>
+            <input type="submit" name="enviar" value="Enviar pedido">
+            <input type="reset" name="cancelar" value="Cancelar">
+        </form>
+    </div>
 </body>
 </html>
