@@ -12,9 +12,16 @@ h1 {
 #texto {
     float: left;
     text-align: right;
+    margin-right: 3px;
 }
 
 #formulario {
     float: left;
     text-align: left;
+    margin-left: 3px;
+}
+
+input {
+    margin-top: 5%;
+    /*margin-bottom: 1%;*/
 }
