@@ -4,24 +4,60 @@ h1 {
 }
 
 #contenedor {
-    background-color: aqua;
-    border: 1px solid blue;
+    margin-left: 15%;
+    margin-right: 10%;
+    background-color:  #e4edf4;
+    border: 1px solid #5484bc;
     float: left;
+    text-align: center;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 #texto {
     float: left;
     text-align: right;
-    margin-right: 3px;
+    margin-right: 4px;
 }
 
 #formulario {
     float: left;
     text-align: left;
-    margin-left: 3px;
+    margin-left: 4px;
 }
 
-input {
-    margin-top: 5%;
-    /*margin-bottom: 1%;*/
+.datsClientes{
+    margin-bottom: 80px;
+}
+
+.datsProductos {
+    margin-bottom: 70px;
+}
+
+.datsEnvio {
+    margin-bottom: 35px;
+}
+
+.datsBancarios {
+    margin-bottom: 80px;
+}
+
+#name {
+    margin-top: 50px;
+}
+
+#nombreEntidad {
+    margin-top: 30px;
+}
+
+#comentario {
+    margin-top: 30px;
+}
+
+#infPublicitaria {
+    margin-bottom: 40px;
+}
+
+#botones {
+    margin-bottom: 20px;
 }

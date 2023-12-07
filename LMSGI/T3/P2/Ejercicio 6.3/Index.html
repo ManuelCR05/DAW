@@ -13,81 +13,99 @@
         <div id="texto">
             <form>
                 <p><strong>Datos del cliente:</strong></p>
+                <div class="datsClientes">
+                    <label for="name">Nombre</label>
+                    <br>
+                    <label for="email">Correo Electrónico</label>
+                    <br>
+                    <label for="tipoCliente">Tipo de cliente</label>
+                </div>
                 
-                <label for="name">Nombre</label>
-                <br>
-                <label for="email">Correo Electrónico</label>
-                <br>
-                <label for="tipoCliente">Tipo de cliente</label>
-
                 <p><strong>Datos de los productos:</strong></p>
-
-                <br>
-                <br>
+                <div class="datsProductos">
+                    <label for="producto">Productos solicitado</label>
+                </div>
                 
-                <label for="producto">Productos solicitado</label>
-
-                <p><strong>Datos de envío:</strong></p>
-
-                <label for="direcion">Dirección</label>
-                <br>
-                <label for="ciudad">Ciudad</label>
-                <br>
-                <label for="codPostal">Código Postal</label>
-
+                
+                <div class="datsEnvio">
+                    <br>
+                    <br>
+                    <p><strong>Datos de envío:</strong></p>
+                    <label for="direcion">Dirección</label>
+                    <br>
+                    <label for="ciudad">Ciudad</label>
+                    <br>
+                    <label for="codPostal">Código Postal</label>
+                </div>
+                
                 <p>Datos bancarios:</p>
-
-                <label for="nombreEntidad">Nombre de la entidad</label>
-                <br>
-                <label for="numCuenta">Número de Cuenta</label>
-
+                <div class="datsBancarios">
+                    <label for="nombreEntidad">Nombre de la entidad</label>
+                    <br>
+                    <label for="numCuenta">Número de Cuenta</label>
+                </div>
+                
                 <p><strong>Otra información del pedido:</strong></p>
-
-                <label for="comentario">Comentarios</label>
-                <br>
-                <label for="infPublicitaria">Acepto recibir información publicitaria</label>
+                <div class="infPedido">
+                    <label for="comentario">Comentarios</label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label for="infPublicitaria">Acepto recibir información publicitaria</label>
+                </div>
             </form>
         </div>
 
         <div id="formulario">
             <form>
-                <br>
-                <br>
-                <input type="text" id="name" name="nombreCliente">
-                <br>
-                <input type="email" id="email" name="correoElectronico">
-                <br>
-                <input type="radio" id="tipoCliente" name="TCliente">
-                <br>
-                <input type="radio" id="tipoCliente" name="TCliente">
-                <br>
-                <input type="radio" id="tipoCliente" name="TCliente">
-                <br>
-                <select name="TProducto" id="producto" multiple size="5">
-                    <option value="">AR001 Oro Reluciente</option>
-                    <option value="">AR002 Plata Pulida</option>
-                    <option value="">AR003 Bronce Reforzado</option>
-                    <option value="">EX001 Escudo</option>
-                    <option value="">EX002 Invisibilidad</option>
-                </select>
-                <br>
-                <input type="text" name="direcionDeEnvio" id="direcion">
-                <br>
-                <input type="text" name="ciudadDeEnvio" id="ciudad">
-                <br>
-                <input type="number" name="codigoPostal" id="codPostal">
-                <br>
-                <input type="text" name="NombreEntidadBancaria" id="nombreEntidad">
-                <br>
-                <input type="number" name="NumeroDeCuenta" id="numCuenta">
-                <br>
-                <textarea name="ComentariosDelPedido" id="comentario" cols="30" rows="10" placeholder="Escriba aquí sus comentarios..."></textarea>
-                <br>
-                <input type="checkbox" name="informacionPublicitaria" id="infPublicitaria">
+                <div class="datsClientes">                    
+                    <input type="text" id="name" name="nombreCliente" size="50">
+                    <br>
+                    <input type="email" id="email" name="correoElectronico" size="40">
+                    <br>
+                    <input type="radio" id="tipoCliente" name="TCliente"> Particular
+                    <br>
+                    <input type="radio" id="tipoCliente" name="TCliente"> Asociación
+                    <br>
+                    <input type="radio" id="tipoCliente" name="TCliente"> Empresa
+                </div>
+                
+                <div class="datsProductos">
+                    <select name="TProducto" id="producto" multiple size="5">
+                        <option value="">AR001 Oro Reluciente</option>
+                        <option value="">AR002 Plata Pulida</option>
+                        <option value="">AR003 Bronce Reforzado</option>
+                        <option value="">EX001 Escudo</option>
+                        <option value="">EX002 Invisibilidad</option>
+                    </select>
+                </div>
+                
+                <div class="datsEnvio">
+                    <input type="text" name="direcionDeEnvio" id="direcion" size="50">
+                    <br>
+                    <input type="text" name="ciudadDeEnvio" id="ciudad" size="30">
+                    <br>
+                    <input type="text" name="codigoPostal" id="codPostal" size="6">
+                </div>
+                
+                <div class="datsBancarios">
+                    <input type="text" name="NombreEntidadBancaria" id="nombreEntidad" size="40">
+                    <br>
+                    <input type="text" name="NumeroDeCuenta" id="numCuenta" size="30">
+                </div>
+                
+                <div class="infPedido">
+                    <textarea name="ComentariosDelPedido" id="comentario" cols="50" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
+                    <br>
+                    <br>
+                    <input type="checkbox" name="informacionPublicitaria" id="infPublicitaria">
+                </div>
             </form>
         </div>
 
-        <form>
+        <form id="botones">
             <input type="submit" name="enviar" value="Enviar pedido">
             <input type="reset" name="cancelar" value="Cancelar">
         </form>
