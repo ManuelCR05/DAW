@@ -1,0 +1,102 @@
+body {
+    margin: 0%;
+    padding: 1%;
+    background-image: url("../img/FondoDePagina.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#cabecera {
+    text-align: center;
+    border: 7px solid black;
+    border-radius: 50px;
+    margin-left: 15%;
+    margin-right: 15%;
+    backdrop-filter: blur(15px);
+    font-size: 25px;
+}
+
+#menu {
+    text-align: center;
+    padding: 1%;
+    margin-top: 1%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 2%;
+    border: 4px solid black;
+    border-radius: 10px;
+    backdrop-filter: blur(100px);
+}
+
+#menu a {
+    margin: 3%;
+    color: white;
+    font-size: 20px;
+}
+
+#menu a:hover {
+    color: yellow;
+}
+
+#col1 {
+    float: left;
+    text-align: center;
+    width: 30%;
+    margin-left: 1.5%;
+    margin-right: 3%;
+    border: 3px solid black;
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+}
+
+#col2 {
+    float: left;
+    text-align: center;
+    width: 30%;
+    margin-right: 3%;
+    border: 3px solid black;
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+}
+
+#col3 {
+    float: left;
+    text-align: center;
+    width: 30%;
+    border: 3px solid black;
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+}
+
+.pokemon {
+    width: 300px;
+    height: 300px;
+}
+
+.carta {
+    width: 50px;
+    height: 60px;
+}
+
+.carta:hover {
+    width: 300px;
+    height: 330px;
+    margin-top: 2%;
+}
+
+.carta:hover + .pokemon {
+    width: 0px;
+    height: 0px;
+}
+
+hr {
+    width: 400px;
+    border-color: red;
+}
+
+p {
+    text-align: justify;
+    font-size: 18px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
