@@ -7,34 +7,69 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="parrafo">hola</p>
+    <!--<p id="parrafo">hola</p>-->
+
+    <canvas id="myCanvas" width="400" height="300" style="border: 1px solid black;"></canvas>
 
     <script>
-        function changeParagraph() {
-            let parrafo = document.getElementById('parrafo')
-            parrafo.innerHTML = 'Adios'
-            parrafo.style.color = 'red'
-            parrafo.style.fontSize = '100px'
+        var pacman = {}
+        var resumed = false
+    
+        function initGame() {
+            pacman.x = 50
+            pacman.y = 50
+
+            window.requestAnimationFrame(onFrame)
+        }
+
+        function onFrame () {
+            if (resumed === true)
+                animatePacman()
+                drawInCanvas()
+        }
+
+        function animatePacman() {
+            pacman.x += 1
+            pacman.y += 1
         }
 
         function drawInCanvas() {
             let c = document.getElementById('myCanvas')
             let ctx = c.getContext('2d')
-            ctx.moveTo(0, 0)
-            ctx.lineTo(200, 100)
+
+            ctx.clearRect(0, 0, c.width, c.height)
+
+            //ctx.moveTo(0, 0)
+            ctx.beginPath()
+            ctx.arc(pacman.x, pacman.y, 40, 0, 2 * Math.PI)
             ctx.stroke()
 
-            ctx.beginPath()
-            ctx.arc(95, 50, 40, 0, 2 * Math.PI)
-            ctx.stroke()
+            window.requestAnimationFrame(onFrame)
         }
+
+        function pauseGame() {
+            if (resumed === true)
+                resumed = false
+            else
+                resumed = true
+        }
+
+
+        /*
+        function changeParagraph() {
+            let parrafo = document.getElementById('parrafo')
+
+            parrafo.innerHTML = 'Adios'
+            parrafo.style.color = 'red'
+            parrafo.style.fontSize = '100px'
+        }
+        */
 
         //changePaeagraph()
     </script>
 
-    <canvas id="myCanvas" width="400" height="300" style="border: 1px solid black;"></canvas>
-
-    <button onclick="drawInCanvas()">Click me</button>
+    <button onclick="initGame()">Empezar el juego</button>
+    <button onclick="pauseGame()">Pause</button>
 
     
 </body>
