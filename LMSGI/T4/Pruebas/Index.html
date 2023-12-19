@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="parrafo">hola</p>
+
+    <script>
+        function changeParagraph() {
+            let parrafo = document.getElementById('parrafo')
+            parrafo.innerHTML = 'Adios'
+            parrafo.style.color = 'red'
+            parrafo.style.fontSize = '100px'
+        }
+
+        function drawInCanvas() {
+            let c = document.getElementById('myCanvas')
+            let ctx = c.getContext('2d')
+            ctx.moveTo(0, 0)
+            ctx.lineTo(200, 100)
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.arc(95, 50, 40, 0, 2 * Math.PI)
+            ctx.stroke()
+        }
+
+        //changePaeagraph()
+    </script>
+
+    <canvas id="myCanvas" width="400" height="300" style="border: 1px solid black;"></canvas>
+
+    <button onclick="drawInCanvas()">Click me</button>
+
+    
+</body>
+</html>
