@@ -15,17 +15,33 @@
         var pacman = {}
         var resumed = false
     
+        window.addEventListener('keydown', (event) => {
+            if(event.keyCode == 65)	
+                pacman.x -= pacman.velocity;
+            else if(event.keyCode == 68)			
+                pacman.x += pacman.velocity;
+            else if(event.keyCode == 87) 					
+                pacman.y -= pacman.velocity;
+            else if(event.keyCode == 83) 					
+                pacman.y += pacman.velocity;
+        })
+
         function initGame() {
             pacman.x = 50
             pacman.y = 50
+            pacman.velocity = 10;
 
             window.requestAnimationFrame(onFrame)
+        }
+
+        function pauseGame() {
+            resumed = !resumed
         }
 
         function onFrame () {
             if (resumed === true)
                 animatePacman()
-                drawInCanvas()
+            drawGame()
         }
 
         function animatePacman() {
@@ -33,7 +49,7 @@
             pacman.y += 1
         }
 
-        function drawInCanvas() {
+        function drawGame() {
             let c = document.getElementById('myCanvas')
             let ctx = c.getContext('2d')
 
@@ -47,12 +63,7 @@
             window.requestAnimationFrame(onFrame)
         }
 
-        function pauseGame() {
-            if (resumed === true)
-                resumed = false
-            else
-                resumed = true
-        }
+        
 
 
         /*
@@ -64,12 +75,12 @@
             parrafo.style.fontSize = '100px'
         }
         */
-
+        //alert (event.keyCode)
         //changePaeagraph()
     </script>
 
     <button onclick="initGame()">Empezar el juego</button>
-    <button onclick="pauseGame()">Pause</button>
+    <button onclick="pauseGame()">Iniciar/Pausar</button>
 
     
 </body>
