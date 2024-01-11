@@ -110,8 +110,10 @@ class Pacman {
                     this.sumarAlto = this.direccion[this.pulsada][3]
                 }
 
-                if (puntito.comprobarColision(x, y)) {
-                    visibilidadPuntitos = false
+                for (let i = 0; i < arrayPuntitos.length; i++) {
+                    if (puntito[i].comprobarColision(x, y)) {
+                        puntito[i].visibilidad = false
+                    }
                 }
             }
         }
@@ -155,7 +157,9 @@ class Fantasmas {
 }
 
 class Puntitos {
-    constructor() {
+    constructor(x, y) {
+        this.x = x
+        this.y = y
         this.visibilidad = true
         this.puntuacionPuntitos = 5
     }
@@ -170,13 +174,22 @@ class Puntitos {
     }
 
     dibujarPuntitos() {
-        for (let y = 0; y < mapa.length; y++) {
+        context.drawImage(puntitoImg, 0, 0, puntitoImg.width - 1, puntitoImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40)
+
+        /*for (let y = 0; y < mapa.length; y++) {
             for (let x = 0; x < mapa[0].length; x++) {
                 if (mapa[y][x] == 1 && visibilidadPuntitos) {
                     context.drawImage(puntitoImg, 0, 0, puntitoImg.width - 1, puntitoImg.height - 1, x * TILEX + 20 , y * TILEY + 20, TILEX - 40, TILEY - 40)
                 }
             }
-        } 
+        }*/ 
+    }
+
+    dibujarFondo() {
+        context.beginPath()
+        context.fillStyle = COLORFONDO
+        context.fill()
+        context.closePath
     }
 }
 
@@ -255,11 +268,11 @@ function instanciarJuego() {
     pacman = new Pacman()
     laberinto = new Laberinto()
     fantasma = new Fantasmas()
-    puntito = new Puntitos()
+    //puntito = new Puntitos()
     punto = new Puntos()
     cereza = new Cereza()
 
-    /*let contador = 0
+    let contador = 0
     for (let y = 0; y < mapa.length; y++) {
         for (let x = 0; x < mapa[0].length; x++) {
             if (mapa[y][x] == 1) {
@@ -268,7 +281,7 @@ function instanciarJuego() {
                 contador++
             }
         }
-    }*/
+    }
 
     setInterval(() => {
         iniciarJuego()
@@ -285,17 +298,18 @@ function dibujarCanvas() {
     context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-/*function cargarImagenPuntitos() {
+function cargarImagenPuntitos() {
     for (let i = 0; i < arrayPuntitos.length; i++) {
-        if (puntito[i].comprobarColision(puntito[i], pacman)) {
-            puntito[i].visibilidad = false
-        }
-
         if (puntito[i].visibilidad) {
             puntito[i].dibujarPuntitos()
         }
+        else {
+            puntito[i].dibujarFondo()
+        }
     }
-}*/
+
+    
+}
 
 function dibujarFPS() {
     context.font = '12px calibri'
@@ -308,8 +322,8 @@ function dibujarFPS() {
 function iniciarJuego() {
     dibujarCanvas()
 
-    //cargarImagenPuntitos()
-    puntito.dibujarPuntitos()
+    cargarImagenPuntitos()
+    //puntito.dibujarPuntitos()
     punto.dibujarPunto()
     pacman.dibujarPacman()
     laberinto.dibujarLaberinto()
