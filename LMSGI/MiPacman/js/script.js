@@ -306,9 +306,7 @@ function cargarImagenPuntitos() {
         else {
             puntito[i].dibujarFondo()
         }
-    }
-
-    
+    }    
 }
 
 function dibujarFPS() {
