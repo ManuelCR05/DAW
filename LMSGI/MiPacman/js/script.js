@@ -45,7 +45,7 @@ var cereza
 var puntito = []
 var arrayPuntitos = []
 var punto = []
-var arrayPunto = []
+var arrayPuntos = []
 
 
 // Clases:
@@ -91,7 +91,8 @@ class Pacman {
             up: [0, -1, 0, 0],            
             down: [0, 1, 0, 1]
         }
-        this.pulsada
+
+        this.teclaPulsada
     }
 
     actualizarPosiciones() {
@@ -99,20 +100,22 @@ class Pacman {
         let y = 0
 
         if (this.x % TILEX == 0 && this.y % TILEY == 0) {
-            if (this.direccion.hasOwnProperty(this.pulsada)) {
-                x = parseInt(this.x / TILEX + this.direccion[this.pulsada][0])
-                y = parseInt(this.y / TILEY + this.direccion[this.pulsada][1])
+            if (this.direccion.hasOwnProperty(this.teclaPulsada)) {
+                x = parseInt(this.x / TILEX + this.direccion[this.teclaPulsada][0])
+                y = parseInt(this.y / TILEY + this.direccion[this.teclaPulsada][1])
 
                 if (!(laberinto.comprobarColision(x, y))) {
-                    this.movX = this.direccion[this.pulsada][0]
-                    this.movY = this.direccion[this.pulsada][1]
-                    this.sumarAncho = this.direccion[this.pulsada][2]
-                    this.sumarAlto = this.direccion[this.pulsada][3]
+                    this.movX = this.direccion[this.teclaPulsada][0]
+                    this.movY = this.direccion[this.teclaPulsada][1]
+                    this.sumarAncho = this.direccion[this.teclaPulsada][2]
+                    this.sumarAlto = this.direccion[this.teclaPulsada][3]
                 }
+
 
                 for (let i = 0; i < arrayPuntitos.length; i++) {
                     if (puntito[i].comprobarColision(x, y)) {
-                        puntito[i].visibilidad = false
+                        puntito[i].visibilidad = false;
+                        break;
                     }
                 }
             }
@@ -134,19 +137,19 @@ class Pacman {
     }
 
     arriba() {
-        this.pulsada = 'up'
+        this.teclaPulsada = 'up'
     }
 
     abajo() {
-        this.pulsada = 'down'
+        this.teclaPulsada = 'down'
     }
 
     derecha() {
-        this.pulsada = 'right'
+        this.teclaPulsada = 'right'
     }
 
     izquierda() {
-        this.pulsada = 'left'
+        this.teclaPulsada = 'left'
     }
 }
 
@@ -158,31 +161,21 @@ class Fantasmas {
 
 class Puntitos {
     constructor(x, y) {
-        this.x = x
-        this.y = y
+        this.x = x 
+        this.y = y 
         this.visibilidad = true
         this.puntuacionPuntitos = 5
+        this.dibujarPuntitos()
     }
 
     comprobarColision(x, y) {
-        if (mapa[y][x] == 1) {
-            return true
-        }
-        else {
-            return false
-        }
+        return this.x === x && this.y === y && this.visibilidad;
     }
 
     dibujarPuntitos() {
-        context.drawImage(puntitoImg, 0, 0, puntitoImg.width - 1, puntitoImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40)
-
-        /*for (let y = 0; y < mapa.length; y++) {
-            for (let x = 0; x < mapa[0].length; x++) {
-                if (mapa[y][x] == 1 && visibilidadPuntitos) {
-                    context.drawImage(puntitoImg, 0, 0, puntitoImg.width - 1, puntitoImg.height - 1, x * TILEX + 20 , y * TILEY + 20, TILEX - 40, TILEY - 40)
-                }
-            }
-        }*/ 
+        if (this.visibilidad) {
+            context.drawImage(puntitoImg, 0, 0, puntitoImg.width - 1, puntitoImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40);
+        }
     }
 
     dibujarFondo() {
@@ -194,7 +187,33 @@ class Puntitos {
 }
 
 class Puntos {
-    constructor() {
+    constructor(x, y) {
+        this.x = x 
+        this.y = y 
+        this.visibilidad = true
+        this.puntuacionPuntitos = 5
+        this.dibujarPuntos()
+    }
+
+    comprobarColision(x, y) {
+        return this.x === x && this.y === y && this.visibilidad;
+    }
+
+    dibujarPuntos() {
+        if (this.visibilidad) {
+            context.drawImage(puntoImg, 0, 0, puntoImg.width - 1, puntoImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40);
+        }
+    }
+
+    dibujarFondo() {
+        context.beginPath()
+        context.fillStyle = COLORFONDO
+        context.fill()
+        context.closePath
+    }
+
+
+    /*constructor() {
         
     }
 
@@ -215,7 +234,7 @@ class Puntos {
                 }
             }
         }
-    }
+    }*/
 }
 
 class Cereza {
@@ -244,6 +263,8 @@ window.addEventListener('keydown', (event) => {
 
 // Funciones:
 function instanciarJuego() {
+    let contadorPuntitos = 0
+    let contadorPuntos = 0
     canvas = document.getElementById('myCanvas')
     context = canvas.getContext('2d')
     canvas.width = RESOLUCION[0]
@@ -268,17 +289,26 @@ function instanciarJuego() {
     pacman = new Pacman()
     laberinto = new Laberinto()
     fantasma = new Fantasmas()
-    //puntito = new Puntitos()
-    punto = new Puntos()
     cereza = new Cereza()
 
-    let contador = 0
+    //Instanciar Puntitos
     for (let y = 0; y < mapa.length; y++) {
         for (let x = 0; x < mapa[0].length; x++) {
             if (mapa[y][x] == 1) {
-                puntito[contador] = new Puntitos(x, y)
-                arrayPuntitos.push(puntito[contador])
-                contador++
+                puntito[contadorPuntitos] = new Puntitos(x, y)
+                arrayPuntitos.push(puntito[contadorPuntitos])
+                contadorPuntitos++
+            }
+        }
+    }
+
+    //Instanciar Puntos
+    for (let y = 0; y < mapa.length; y++) {
+        for (let x = 0; x < mapa[0].length; x++) {
+            if (mapa[y][x] == 5) {
+                punto[contadorPuntos] = new Puntos(x, y)
+                arrayPuntos.push(punto[contadorPuntos])
+                contadorPuntos++
             }
         }
     }
@@ -306,7 +336,18 @@ function cargarImagenPuntitos() {
         else {
             puntito[i].dibujarFondo()
         }
-    }    
+    }
+}
+
+function cargarImagenPuntos() {
+    for (let i = 0; i < arrayPuntos.length; i++) {
+        if (punto[i].visibilidad) {
+            punto[i].dibujarPuntos()
+        }
+        else {
+            punto[i].dibujarFondo()
+        }
+    }
 }
 
 function dibujarFPS() {
@@ -321,8 +362,7 @@ function iniciarJuego() {
     dibujarCanvas()
 
     cargarImagenPuntitos()
-    //puntito.dibujarPuntitos()
-    punto.dibujarPunto()
+    cargarImagenPuntos()
     pacman.dibujarPacman()
     laberinto.dibujarLaberinto()
 
