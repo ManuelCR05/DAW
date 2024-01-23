@@ -118,6 +118,13 @@ class Pacman {
                         break;
                     }
                 }
+
+                for (let i = 0; i < arrayPuntos.length; i++) {
+                    if (punto[i].comprobarColision(x, y)) {
+                        punto[i].visibilidad = false;
+                        break;
+                    }
+                }
             }
         }
 
@@ -191,7 +198,7 @@ class Puntos {
         this.x = x 
         this.y = y 
         this.visibilidad = true
-        this.puntuacionPuntitos = 5
+        this.puntuacionPunto = 15
         this.dibujarPuntos()
     }
 
@@ -201,7 +208,7 @@ class Puntos {
 
     dibujarPuntos() {
         if (this.visibilidad) {
-            context.drawImage(puntoImg, 0, 0, puntoImg.width - 1, puntoImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40);
+            context.drawImage(puntoImg, 0, 0, puntoImg.width - 1, puntoImg.height - 1, this.x * TILEX + 10 , this.y * TILEY + 10, TILEX - 20, TILEY - 20);
         }
     }
 
@@ -211,30 +218,6 @@ class Puntos {
         context.fill()
         context.closePath
     }
-
-
-    /*constructor() {
-        
-    }
-
-    comprobarColision(x, y) {
-        if (mapa[y][x] == 5) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-
-    dibujarPunto() {
-        for (let y = 0; y < mapa.length; y++) {
-            for (let x = 0; x < mapa[0].length; x++) {
-                if (mapa[y][x] == 5 && visibilidadPuntos) {
-                    context.drawImage(puntoImg, 0, 0, puntoImg.width - 1, puntoImg.height - 1, x * TILEX + 10, y * TILEY + 10, TILEX - 20, TILEY - 20)
-                }
-            }
-        }
-    }*/
 }
 
 class Cereza {
