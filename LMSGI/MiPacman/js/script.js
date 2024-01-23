@@ -32,10 +32,6 @@ var puntuacion = 0
 var vidas = 5
 var gameover = false
 var momentoActual = 1
-var visibilidadPuntitos = true
-var visibilidadPuntos = true
-//var contPuntitosComidos = 0
-//var puntitosComidos = 0
 
 //------------------------OBJETOS/ARRAYS------------------------//
 var laberinto
@@ -115,6 +111,7 @@ class Pacman {
                 for (let i = 0; i < arrayPuntitos.length; i++) {
                     if (puntito[i].comprobarColision(x, y)) {
                         puntito[i].visibilidad = false;
+                        console.log(puntuacion += puntito[i].puntuacionPuntitos)
                         break;
                     }
                 }
@@ -122,6 +119,7 @@ class Pacman {
                 for (let i = 0; i < arrayPuntos.length; i++) {
                     if (punto[i].comprobarColision(x, y)) {
                         punto[i].visibilidad = false;
+                        console.log(puntuacion += punto[i].puntuacionPunto)
                         break;
                     }
                 }
@@ -334,11 +332,28 @@ function cargarImagenPuntos() {
 }
 
 function dibujarFPS() {
-    context.font = '12px calibri'
-    context.fillStyle = 'white'
-    context.fillText('FPS: ' + updateConteoFPS.toString(), 15, 15)
+    let textoFPS = document.getElementById('fps')
+
+    textoFPS.style.font = '12px calibri'
+    textoFPS.style.color = 'white'
+    textoFPS.textContent = 'FPS: ' + updateConteoFPS.toString()
 }
 
+function dibujarPuntuacion() {
+    let textoPuntuacion = document.getElementById('puntuacion')
+
+    textoPuntuacion.style.font = '15px calibri'
+    textoPuntuacion.style.color = 'white'
+    textoPuntuacion.textContent = 'Puntuación: ' + puntuacion.toString()
+}
+
+function dibujarVidas() {
+    let textoVidas = document.getElementById('vidas')
+
+    textoVidas.style.font = '15px calibri'
+    textoVidas.style.color = 'white'
+    textoVidas.textContent = 'Vidas: ' + vidas.toString()
+}
 
 //------------------------INICIAR JUEGO------------------------//
 function iniciarJuego() {
@@ -349,6 +364,8 @@ function iniciarJuego() {
     pacman.dibujarPacman()
     laberinto.dibujarLaberinto()
 
+    dibujarVidas()
+    dibujarPuntuacion()
     dibujarFPS()
     contadorFPS++
 }
