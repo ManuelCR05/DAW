@@ -107,11 +107,10 @@ class Pacman {
                     this.sumarAlto = this.direccion[this.teclaPulsada][3]
                 }
 
-
                 for (let i = 0; i < arrayPuntitos.length; i++) {
                     if (puntito[i].comprobarColision(x, y)) {
                         puntito[i].visibilidad = false;
-                        console.log(puntuacion += puntito[i].puntuacionPuntitos)
+                        puntuacion += puntito[i].puntuacionPuntitos
                         break;
                     }
                 }
@@ -119,7 +118,7 @@ class Pacman {
                 for (let i = 0; i < arrayPuntos.length; i++) {
                     if (punto[i].comprobarColision(x, y)) {
                         punto[i].visibilidad = false;
-                        console.log(puntuacion += punto[i].puntuacionPunto)
+                        puntuacion += punto[i].puntuacionPunto
                         break;
                     }
                 }
