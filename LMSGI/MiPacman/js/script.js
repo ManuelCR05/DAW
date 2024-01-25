@@ -42,6 +42,7 @@ var puntito = []
 var arrayPuntitos = []
 var punto = []
 var arrayPuntos = []
+var fantasmas = []
 
 
 // Clases:
@@ -159,7 +160,93 @@ class Pacman {
 
 class Fantasmas {
     constructor() {
-        
+        this.x = 9 * TILEX
+        this.y = 5 * TILEY
+        this.ancho = TILEX 
+        this.alto = TILEY
+        this.movX = 1
+        this.movY = 0
+        this.sumarAncho = 1
+        this.sumarAlto = 0
+
+        this.direccion = {
+            right: [1, 0, 1, 0], 
+            left: [-1, 0, 0, 0], 
+            up: [0, -1, 0, 0],            
+            down: [0, 1, 0, 1]
+        }
+
+        this.teclaPulsada
+    }
+
+    actualizarPosiciones() {
+        let x = 0
+        let y = 0
+
+        if (this.x % TILEX == 0 && this.y % TILEY == 0) {
+            if (this.direccion.hasOwnProperty(this.teclaPulsada)) {
+                x = parseInt(this.x / TILEX + this.direccion[this.teclaPulsada][0])
+                y = parseInt(this.y / TILEY + this.direccion[this.teclaPulsada][1])
+
+                if (!(laberinto.comprobarColision(x, y))) {
+                    this.movX = this.direccion[this.teclaPulsada][0]
+                    this.movY = this.direccion[this.teclaPulsada][1]
+                    this.sumarAncho = this.direccion[this.teclaPulsada][2]
+                    this.sumarAlto = this.direccion[this.teclaPulsada][3]
+                }
+
+                for (let i = 0; i < arrayPuntitos.length; i++) {
+                    if (puntito[i].comprobarColision(x, y)) {
+                        puntito[i].visibilidad = false;
+                        puntuacion += puntito[i].puntuacionPuntitos
+                        break;
+                    }
+                }
+
+                for (let i = 0; i < arrayPuntos.length; i++) {
+                    if (punto[i].comprobarColision(x, y)) {
+                        punto[i].visibilidad = false;
+                        puntuacion += punto[i].puntuacionPunto
+                        break;
+                    }
+                }
+            }
+        }
+
+        x = parseInt((this.x + this.movX + this.ancho * this.sumarAncho) / TILEX)
+        y = parseInt((this.y + this.movY + this.alto * this.sumarAlto) / TILEY)
+
+        if (!(laberinto.comprobarColision(x, y))) {
+            this.x += this.movX * 2
+            this.y += this.movY * 2
+        }
+    }
+
+    dibujarFantasma() {
+        let contador = 0
+        for (let y = 0; y < mapa.length; y++) {
+            for (let x = 0; x < mapa[0].length; x++) {
+                if (mapa[y][x] == 4) {
+                    context.drawImage(fantasmas[contador], 0, 0, fantasmas[contador].width - 1, fantasmas[contador].height - 1, this.x, this.y, this.ancho, this.alto)
+                }
+            }
+        }
+    }
+
+    arriba() {
+        this.teclaPulsada = 'up'
+    }
+
+    abajo() {
+        this.teclaPulsada = 'down'
+    }
+
+    derecha() {
+        this.teclaPulsada = 'right'
+    }
+
+    izquierda() {
+        this.teclaPulsada = 'left'
     }
 }
 
@@ -265,6 +352,11 @@ function instanciarJuego() {
 
     cerezaImg = new Image()
     cerezaImg.src = './img/cereza.png'
+
+    for (let i = 0; i <= 4; i++) {
+        fantasmas[i] = new Image()
+        fantasmas[i].src = './img/Fantasma' + (i + 1) + '.png' 
+    }
 
     pacman = new Pacman()
     laberinto = new Laberinto()
