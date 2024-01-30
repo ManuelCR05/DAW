@@ -6,6 +6,22 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="./js/Prueba1/script.js" type="text/javascript"></script>
+    <!-- <script src="./js/Prueba1/script.js" type="text/javascript"></script> -->
+
+    <p id="intro">Hola</p>
+    <p id="demo">Pepe <a href="https://es.wikipedia.org/wiki/Wifi"></a></p>
+
+    <button id="miBoton">Cambiar Texto</button>
+
+    <script>
+        const elemento = document.getElementById('intro')
+        const miBoton = document.getElementById('miBoton')
+
+        miBoton.addEventListener('click', event => {
+            document.getElementById('demo').innerHTML += '<b>' + elemento.innerHTML + '</b>'
+            var enlace = document.getElementsByTagName('a')
+        })
+        
+    </script>
 </body>
 </html>

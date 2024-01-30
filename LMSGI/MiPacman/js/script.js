@@ -86,7 +86,8 @@ class Pacman {
             right: [1, 0, 1, 0], 
             left: [-1, 0, 0, 0], 
             up: [0, -1, 0, 0],            
-            down: [0, 1, 0, 1]
+            down: [0, 1, 0, 1],
+            noMove: [0, 0, 0, 0]
         }
 
         this.teclaPulsada
@@ -155,6 +156,10 @@ class Pacman {
 
     izquierda() {
         this.teclaPulsada = 'left'
+    }
+
+    pausarMovimiento() {
+        this.teclaPulsada = 'noMove'
     }
 }
 
@@ -311,8 +316,8 @@ class Cereza {
 }
 
 
-// Evento:
-window.addEventListener('keydown', (event) => {
+// Eventos:
+window.addEventListener('keydown', event => {
     if (event.key == 'w' || event.key == 'W' || event.keyCode == 38) {
         pacman.arriba() 
     }
@@ -324,6 +329,21 @@ window.addEventListener('keydown', (event) => {
     }
     else if (event.key == 'd' || event.key == 'D' || event.keyCode == 39) {
         pacman.derecha()
+    }
+})
+
+window.addEventListener('keyup', event => {
+    if (event.key == 'w' || event.key == 'W' || event.keyCode == 38) {
+        pacman.pausarMovimiento() 
+    }
+    else if (event.key == 's' || event.key == 'S' || event.keyCode == 40) {
+        pacman.pausarMovimiento()
+    }
+    else if (event.key == 'a' || event.key == 'A' || event.keyCode == 37) {
+        pacman.pausarMovimiento()
+    }
+    else if (event.key == 'd' || event.key == 'D' || event.keyCode == 39) {
+        pacman.pausarMovimiento()   
     }
 })
 
