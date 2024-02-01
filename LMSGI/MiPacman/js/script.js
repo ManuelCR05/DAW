@@ -36,13 +36,13 @@ var momentoActual = 1
 //------------------------OBJETOS/ARRAYS------------------------//
 var laberinto
 var pacman
-var fantasma
 var cereza
+var fantasma = []
+var arrayFantasmas = []
 var puntito = []
 var arrayPuntitos = []
 var punto = []
 var arrayPuntos = []
-var fantasmas = []
 
 
 // Clases:
@@ -165,14 +165,20 @@ class Pacman {
 
 class Fantasmas {
     constructor() {
-        this.x = 9 * TILEX
-        this.y = 5 * TILEY
-        this.ancho = TILEX 
-        this.alto = TILEY
-        this.movX = 1
-        this.movY = 0
-        this.sumarAncho = 1
-        this.sumarAlto = 0
+        // this.x = 9 * TILEX
+        // this.y = 5 * TILEY
+        // this.ancho = TILEX 
+        // this.alto = TILEY
+        // this.movX = 1
+        // this.movY = 0
+        // this.sumarAncho = 1
+        // this.sumarAlto = 0
+
+        this.x = x 
+        this.y = y 
+        this.visibilidad = true
+        this.puntuacionFantasma = 200
+        this.dibujarFantasma()
 
         this.direccion = {
             right: [1, 0, 1, 0], 
@@ -228,13 +234,8 @@ class Fantasmas {
     }
 
     dibujarFantasma() {
-        let contador = 0
-        for (let y = 0; y < mapa.length; y++) {
-            for (let x = 0; x < mapa[0].length; x++) {
-                if (mapa[y][x] == 4) {
-                    context.drawImage(fantasmas[contador], 0, 0, fantasmas[contador].width - 1, fantasmas[contador].height - 1, this.x, this.y, this.ancho, this.alto)
-                }
-            }
+        if (this.visibilidad) {
+            context.drawImage(fantasmasImg, 0, 0, fantasmasImg.width - 1, fantasmasImg.height - 1, this.x * TILEX + 20 , this.y * TILEY + 20, TILEX - 40, TILEY - 40);
         }
     }
 
@@ -352,6 +353,7 @@ window.addEventListener('keyup', event => {
 function instanciarJuego() {
     let contadorPuntitos = 0
     let contadorPuntos = 0
+    let contadorFantasmas = 0
     canvas = document.getElementById('myCanvas')
     context = canvas.getContext('2d')
     canvas.width = RESOLUCION[0]
@@ -374,8 +376,8 @@ function instanciarJuego() {
     cerezaImg.src = './img/cereza.png'
 
     for (let i = 0; i <= 4; i++) {
-        fantasmas[i] = new Image()
-        fantasmas[i].src = './img/Fantasma' + (i + 1) + '.png' 
+        fantasmasImg[i] = new Image()
+        fantasmasImg[i].src = './img/Fantasma' + (i + 1) + '.png' 
     }
 
     pacman = new Pacman()
@@ -404,6 +406,17 @@ function instanciarJuego() {
             }
         }
     }
+
+    //Instanciar Fantasmas
+    for (let y = 0; y < mapa.length; y++) {
+        for (let x = 0; x < mapa[0].length; x++) {
+            if (mapa[y][x] == 4) {
+                fantasma[contadorFantasmas] = new Fantasmas()
+                arrayFantasmas.push(fantasma[contadorFantasmas])
+                contadorFantasmas++
+            }
+        }
+    }  
 
     setInterval(() => {
         iniciarJuego()
