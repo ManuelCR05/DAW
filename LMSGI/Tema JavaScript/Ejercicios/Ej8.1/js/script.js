@@ -1,17 +1,18 @@
-window.addEven
+var buttonImg = document.getElementById('cImagen')
+var buttonTitle = document.getElementById('cTitulo')
+var buttonIxt = document.getElementById('cTexto')
+var imagen = document.getElementById('imagen')
+var titulo = document.getElementById('titulo')
+var texto = document.getElementById('texto')
 
-function CambiarImagen() {
-    var img = document.getElementById('imagen')
-    imagen = new Image()
-    imagen.src = '/img/descarga.png'
+buttonImg.addEventListener('onclick', event => {
+    imagen.src = 'img/descarga.png'
+})
 
-    img.src = imagen
-}
+buttonTitle.addEventListener('onclick', event => {
+    titulo.innerHTML = 'hola'
+})
 
-function CambiarTitulo() {
-    
-}
-
-function Cambiartexto() {
-    
-}
+buttonTxt.addEventListener('onclick', event => {
+    texto.innerHTML = 'si'
+})
