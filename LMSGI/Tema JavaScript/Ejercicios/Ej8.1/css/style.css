@@ -3,6 +3,40 @@ img {
     height: 100px;
 }
 
+/* div {
+    margin-top: 100px;
+    margin-left: 8%;
+    padding: 1%;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 20%;
+    height: 200px;
+    float: left;
+} */
+
 div {
-    margin: 130px;
+    margin-top: 100px;
+    padding: 1%;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 20%;
+    height: 200px;
+}
+
+#bloque1 {
+    margin-left: 5%;
+    margin-right: 10%;
+    float: left;
+}
+
+#bloque2 {
+    margin-left: 2%;
+    float: left;
+}
+
+#bloque3 {
+    margin-right: 5%;
+    float: right;
 }
