@@ -1,7 +1,8 @@
-var tabla = document.getElementById('tabla')
-var cambiarTexto = document.getElementById('cambiarTxt')
-var insertarFila = document.getElementById('insertarFila')
-var borrarFila = document.getElementById('borrarFila')
+const tabla = document.getElementById('tabla')
+var texto = document.getElementById('txt').value
+const cambiarTexto = document.getElementById('cambiarTxt')
+const insertarFila = document.getElementById('insertarFila')
+const borrarFila = document.getElementById('borrarFila')
 
 cambiarTexto.addEventListener('click', event => {
     modificarTexto()
@@ -16,7 +17,21 @@ borrarFila.addEventListener('click', event => {
 })
 
 function modificarTexto() {
+    let nuevoTexto = texto
+    let fila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
+    let columna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
 
+    let rows = tabla.rows[fila]
+    let cells = rows.cells[columna]
+
+    cells.inenerText = nuevoTexto
+
+    console.dir(cells)
+
+    /*let filas = tabla.rows[indiceFila - 1]
+    let celdas = filas.cells
+
+    celdas[indiceColumna].textContect = prompt('texto')*/
 }
 
 function añadirFila() {
@@ -37,7 +52,7 @@ function añadirFila() {
 }
 
 function eliminarFila() {
-    let posicionFila = prompt("Inserta el número de la fila que quieres eliminar")
+    let posicionFila = prompt("Inserta el número de la fila que quieres eliminar") - 1
 
-    tabla.removeChild()
+    tabla.deleteRow(posicionFila)
 }
