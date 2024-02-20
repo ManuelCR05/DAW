@@ -18,20 +18,29 @@ borrarFila.addEventListener('click', event => {
 
 function modificarTexto() {
     let nuevoTexto = texto
-    let fila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
-    let columna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+    let indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
+    let indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
 
-    let rows = tabla.rows[fila]
-    let cells = rows.cells[columna]
+    // let rows = tabla.rows[fila]
+    // let cells = rows.cells[columna]
 
-    cells.inenerText = nuevoTexto
+    // cells.inenerText = nuevoTexto
 
-    console.dir(cells)
+    // console.dir(cells)
 
     /*let filas = tabla.rows[indiceFila - 1]
     let celdas = filas.cells
 
     celdas[indiceColumna].textContect = prompt('texto')*/
+
+    debugger
+    let filaTR = document.getElementsByTagName('tr')
+    let fila = filaTR[indiceFila]
+
+    let columnaTD = document.getElementsByTagName('td')
+    let columna = columnaTD[indiceColumna]
+
+    
 }
 
 function añadirFila() {
