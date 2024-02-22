@@ -1,5 +1,4 @@
-const tabla = document.getElementById('tabla')
-var texto = document.getElementById('txt').value
+var tabla = document.getElementById('tabla')
 const cambiarTexto = document.getElementById('cambiarTxt')
 const insertarFila = document.getElementById('insertarFila')
 const borrarFila = document.getElementById('borrarFila')
@@ -17,43 +16,40 @@ borrarFila.addEventListener('click', event => {
 })
 
 function modificarTexto() {
-    let nuevoTexto = texto
-    let indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
-    let indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+    let texto = document.getElementById('txt').value
+    let indiceColumna
+    let indiceFila
+    let celda
 
-    // let rows = tabla.rows[fila]
-    // let cells = rows.cells[columna]
-
-    // cells.inenerText = nuevoTexto
-
-    // console.dir(cells)
-
-    /*let filas = tabla.rows[indiceFila - 1]
-    let celdas = filas.cells
-
-    celdas[indiceColumna].textContect = prompt('texto')*/
-
-    debugger
-    let filaTR = document.getElementsByTagName('tr')
-    let fila = filaTR[indiceFila]
-
-    let columnaTD = document.getElementsByTagName('td')
-    let columna = columnaTD[indiceColumna]
-
+    if (texto == '') {
+        alert('No hay ningun texto para intercambiar')
+    }
+    else {
+        indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
+        while (indiceFila < 0 || indiceFila >= tabla.childNodes.length) {
+            alert('La fila indicada no exsiste')
+            indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
+        }
     
+        indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+        while (indiceColumna < 0 || indiceColumna >= tabla.childNodes[indiceFila].childNodes.length) {
+            alert('La columna indicada no exsiste')
+            indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+        }
+    
+        celda = tabla.childNodes[indiceFila].childNodes[indiceColumna]
+        celda.innerHTML = texto
+    }
 }
 
 function añadirFila() {
     let fila = document.createElement('tr')
-    let columna = document.createElement('td')
     let numColumnas = prompt('Inserta el número de columnas que quieres añadir')
-    let txtNode
 
     for (let i = 1; i <= numColumnas; i++)
     {
-        txtNode = document.createTextNode('Columna ' + i)
-        columna.appendChild(txtNode)
-        columna.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' 
+        let columna = document.createElement('td')
+        columna.innerHTML += 'Columna ' + i + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' 
         fila.appendChild(columna)
     }
 
