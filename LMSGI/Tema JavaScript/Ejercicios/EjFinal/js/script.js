@@ -25,26 +25,35 @@ function modificarTexto() {
         alert('No hay ningun texto para intercambiar')
     }
     else {
-        indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
-        while (indiceFila < 0 || indiceFila >= tabla.childNodes.length) {
-            alert('La fila indicada no exsiste')
+        if (tabla.childNodes.length == 0) {
+            alert('No hay ninguna fila ni columna a las que modificarles el texto')
+        }
+        else {
             indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
-        }
-    
-        indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
-        while (indiceColumna < 0 || indiceColumna >= tabla.childNodes[indiceFila].childNodes.length) {
-            alert('La columna indicada no exsiste')
+            while (indiceFila < 0 || indiceFila >= tabla.childNodes.length) {
+                alert('La fila indicada no exsiste')
+                indiceFila = parseInt(prompt('¿Qué fila quieres modificar?') - 1)
+            }
+        
             indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+            while (indiceColumna < 0 || indiceColumna >= tabla.childNodes[indiceFila].childNodes.length) {
+                alert('La columna indicada no exsiste')
+                indiceColumna = parseInt(prompt('¿Qué columna quieres modificar?') - 1)
+            }
+        
+            celda = tabla.childNodes[indiceFila].childNodes[indiceColumna]
+            celda.innerHTML = texto
         }
-    
-        celda = tabla.childNodes[indiceFila].childNodes[indiceColumna]
-        celda.innerHTML = texto
     }
 }
 
 function añadirFila() {
     let fila = document.createElement('tr')
     let numColumnas = prompt('Inserta el número de columnas que quieres añadir')
+    while (numColumnas <= 0) {
+        alert('Cantidad de columnas indicadas no valida')
+        numColumnas = prompt('Inserta el número de columnas que quieres añadir')
+    }
 
     for (let i = 1; i <= numColumnas; i++)
     {
@@ -57,7 +66,18 @@ function añadirFila() {
 }
 
 function eliminarFila() {
-    let posicionFila = prompt("Inserta el número de la fila que quieres eliminar") - 1
+    let posicionFila
 
-    tabla.deleteRow(posicionFila)
+    if (tabla.childNodes.length == 0) {
+        alert('No hay ninguna fila creada')
+    }
+    else {
+        posicionFila = prompt("Inserta el número de la fila que quieres eliminar")
+        while (posicionFila <= 0 || posicionFila > tabla.childNodes.length) {
+            alert('La fila indicada no existe')
+            posicionFila = prompt("Inserta el número de la fila que quieres eliminar")
+        }
+
+        tabla.deleteRow(posicionFila - 1)
+    }
 }
