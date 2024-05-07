@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="./css/style.css" type="text/css">
     <title>Pacman</title>
 </head>
-<body onload="instanciarJuego()">
+<body onload="instanciarJuego(getDefaultMap())">
+    <input type="file" id="archivo">
     <div id="myFondo">
         <p id="fps"></p>
         <p id="vidas"></p>
