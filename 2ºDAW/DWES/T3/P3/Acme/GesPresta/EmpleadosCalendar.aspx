@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Empleados.aspx.cs" Inherits="GesPresta.Empleados" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EmpleadosCalendar.aspx.cs" Inherits="GesPresta.EmpleadosCalendar" %>
 
 <%@ Register src="Cabecera.ascx" tagname="Cabecera" tagprefix="uc1" %>
 
@@ -111,11 +111,67 @@
                     </td>
                 </tr>
             </table>
+
+            <br />
+            <br />
+
+          <table>
+                <tr>
+                    <td style="vertical-align: top; text-align: right">
+                        <asp:Label ID="lblFechaNacimiento" runat="server">Fecha de Nacimiento</asp:Label>
+                        <br />
+                        <asp:TextBox ID="txtFechaNacimiento" runat="server" OnTextChanged="txtFechaNacimiento_TextChanged"></asp:TextBox>
+                    </td>
+                    <td style="padding-right: 80px">
+                        <asp:Calendar ID="cFechaNacimiento" runat="server" OnSelectionChanged="cFechaNacimiento_SelectionChanged"></asp:Calendar>
+                    </td>
+                    <td style="vertical-align: top; text-align: right">
+                        <asp:Label ID="lblFechaIngreso" runat="server">Fecha de Ingreso</asp:Label>
+                        <br />
+                        <asp:TextBox ID="txtFechIngreso" runat="server" OnTextChanged="txtFechIngreso_TextChanged"></asp:TextBox>
+                    </td>
+                    <td style="padding-right: 80px">
+                        <asp:Calendar ID="cFechaIngreso" runat="server" OnSelectionChanged="cFechaIngreso_SelectionChanged"></asp:Calendar>
+                    </td>
+                    <td style="vertical-align: top; text-align: left">
+                        <asp:Label ID="lblAntiguedad" runat="server">Antiguedad:</asp:Label>
+                        <br />
+                        <br />
+                        <div  style="text-align: left">
+                            <asp:TextBox ID="txtAnyo" runat="server" Width="60px" style="margin-right: 10px"></asp:TextBox>
+                            <asp:Label ID="lblAnyo" runat="server">Años</asp:Label>
+                        </div>
+                        <br />
+                        <div  style="text-align: left">
+                            <asp:TextBox ID="txtMes" runat="server" Width="60px" style="margin-right: 10px"></asp:TextBox>
+                            <asp:Label ID="lblMes" runat="server">Meses</asp:Label>
+                        </div>
+                        <br />
+                        <div  style="text-align: left">
+                            <asp:TextBox ID="txtDia" runat="server" Width="60px" style="margin-right: 10px"></asp:TextBox>
+                            <asp:Label ID="lblDia" runat="server">Dias</asp:Label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <br />
+        <br />
 
-        <asp:Button ID="btnEnviar" runat="server" Text="Enviar"/>
+        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" OnClick="btnEnviar_Click"/>
+
+        <br />
+        <br />
+
+        <asp:Label ID="lblValores" runat="server" BackColor="#66FFFF" Width="60%" Visible="false"></asp:Label>
+        <br />
+        <asp:Label ID="lblError1" runat="server" ForeColor="Red" Visible="False">La fecha de ingreso no puede ser inferiro a la fecha de nacimiento</asp:Label>
+        <br />
+        <asp:Label ID="lblError2" runat="server" ForeColor="Red" Visible="false">La fecha de ingreso no puede ser mayor a la fecha actual</asp:Label>
+        <br />
+        <asp:Label ID="lblError3" runat="server" ForeColor="Red" Visible="false">La fecha de nacimiento no puede ser mayor a la fehca actual</asp:Label>
+
     </form>
 </body>
 </html>
