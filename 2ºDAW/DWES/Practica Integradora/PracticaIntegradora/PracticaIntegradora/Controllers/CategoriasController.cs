@@ -20,9 +20,14 @@ namespace PracticaIntegradora.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Categorias.ToListAsync());
+            var categorias = from s in _context.Categorias
+                           select s;
+
+            int pageSize = 10;
+            return View(await PaginatedList<Categoria>.CreateAsync(categorias.AsNoTracking(),
+                pageNumber ?? 1, pageSize));
         }
 
         // GET: Categorias/Details/5

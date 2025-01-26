@@ -20,10 +20,17 @@ namespace PracticaIntegradora.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            var mvcTiendaContexto = _context.Productos.Include(p => p.Categoria);
-            return View(await mvcTiendaContexto.ToListAsync());
+            //var mvcTiendaContexto = _context.Productos.Include(p => p.Categoria);
+            //return View(await mvcTiendaContexto.ToListAsync());
+
+            var productos = from s in _context.Productos.Include(p => p.Categoria)
+                            select s;
+
+            int pageSize = 10;
+            return View(await PaginatedList<Producto>.CreateAsync(productos.AsNoTracking(),
+                pageNumber ?? 1, pageSize));
         }
 
         // GET: Productos/Details/5

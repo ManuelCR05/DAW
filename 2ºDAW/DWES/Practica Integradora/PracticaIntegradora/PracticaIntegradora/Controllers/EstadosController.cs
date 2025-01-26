@@ -20,9 +20,14 @@ namespace PracticaIntegradora.Controllers
         }
 
         // GET: Estados
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            return View(await _context.Estados.ToListAsync());
+            var edtados = from s in _context.Estados
+                             select s;
+
+            int pageSize = 10;
+            return View(await PaginatedList<Estado>.CreateAsync(edtados.AsNoTracking(),
+                pageNumber ?? 1, pageSize));
         }
 
         // GET: Estados/Details/5
