@@ -44,15 +44,21 @@
                 <span asp-validation-for="Escaparate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="instalador" class="control-label"></label>
-                <input asp-for="instalador" class="form-control" />
-                <span asp-validation-for="instalador" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
                 <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                @{
+                    var nombreArchivo = System.IO.Path.GetFileName(Model.instalador);
+                }
+                <label class="control-label">Instalador</label>
+                <br />
+                <img id="fileIcon" src="/img/General/1.jpg" />
+                <span id="fileName">@nombreArchivo</span>
+                <input type="file" id="fileInput" accept=".exe" style="display: none;">
+            </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -67,3 +73,20 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    document.getElementById("fileIcon").addEventListener("click", () => {
+        document.getElementById("fileInput").click();
+    });
+
+    document.getElementById("fileName").addEventListener("click", () => {
+        document.getElementById("fileInput").click();
+    });
+
+    document.getElementById("fileInput").addEventListener("change", event => {
+        let file = event.target.files[0];
+        console.log(event.target.files);
+        if (file) 
+            document.getElementById("fileName").textContent = file.name;
+    });
+</script>

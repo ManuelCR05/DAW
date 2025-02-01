@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PracticaIntegradora.Models.Detalle>
+﻿@* @model IEnumerable<PracticaIntegradora.Models.Detalle> *@
+@model PaginatedList<PracticaIntegradora.Models.Detalle>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,19 +14,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
+                Cantidad
+               @*  @Html.DisplayNameFor(model => model.Cantidad) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Precio)
+                Precio
+                @* @Html.DisplayNameFor(model => model.Precio) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descuento)
+                Descuento
+                @* @Html.DisplayNameFor(model => model.Descuento) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedido)
+                Pedido
+                @* @Html.DisplayNameFor(model => model.Pedido) *@
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Producto)
+                Producto
+                @* @Html.DisplayNameFor(model => model.Producto) *@
             </th>
             <th></th>
         </tr>
@@ -57,3 +63,16 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-outline-secondary @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-outline-secondary @nextDisabled">
+    Siguiente
+</a>
