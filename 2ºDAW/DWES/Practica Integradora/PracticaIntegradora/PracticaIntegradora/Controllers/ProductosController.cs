@@ -28,7 +28,7 @@ namespace PracticaIntegradora.Controllers
             var productos = from s in _context.Productos.Include(p => p.Categoria)
                             select s;
 
-            int pageSize = 10;
+            int pageSize = 5;
             return View(await PaginatedList<Producto>.CreateAsync(productos.AsNoTracking(),
                 pageNumber ?? 1, pageSize));
         }

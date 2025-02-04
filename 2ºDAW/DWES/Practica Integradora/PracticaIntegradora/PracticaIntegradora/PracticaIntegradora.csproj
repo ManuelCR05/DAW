@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\downloads\Analisis de Datos\" />
     <Folder Include="wwwroot\img\Gestion Empresarial\" />
     <Folder Include="wwwroot\img\Analisis de Datos\" />
   </ItemGroup>

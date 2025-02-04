@@ -28,7 +28,7 @@
                 <input asp-for="Texto" class="form-control" />
                 <span asp-validation-for="Texto" class="text-danger"></span>
             </div>
-           @*  <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Precio" class="control-label"></label>
                 <input asp-for="Precio" class="form-control" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
@@ -56,7 +56,8 @@
                 <br />
                 <img id="fileIcon" src="/img/General/1.jpg" />
                 <span id="fileName">@nombreArchivo</span>
-                <input type="file" id="fileInput" accept=".exe" style="display: none;">
+                <input type="file" id="fileInput" accept=".exe" style="display: none;"/>
+                <input asp-for="instalador" class="form-control" id="file" style="display: none;" />
             </div>
             <br />
             <div class="form-group">
@@ -85,8 +86,10 @@
 
     document.getElementById("fileInput").addEventListener("change", event => {
         let file = event.target.files[0];
-        console.log(event.target.files);
-        if (file) 
+        if (file)
+        {
+            document.getElementById("file").value = "/downloads/" + file.name;
             document.getElementById("fileName").textContent = file.name;
+        }
     });
 </script>
