@@ -22,8 +22,7 @@ namespace PracticaIntegradora.Controllers
         // POST: MisDatos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>
-        Create([Bind("Id,Nombre,Email,Telefono,Direccion,Poblacion,CodigoPostal,Nif")] Cliente empleado)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Email,Telefono,Direccion,Poblacion,CodigoPostal,Nif")] Cliente empleado)
         {
             // Asignar el Email del usuario actual
             empleado.Email = User.Identity.Name;
