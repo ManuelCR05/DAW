@@ -55,7 +55,7 @@ namespace PracticaIntegradora.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-         [Bind("Id,Nombre,Email,Telefono,FechaNacimiento")] Cliente empleado)
+         [Bind("Id,Nombre,Email,Telefono,Direccion,Poblacion,CodigoPostal,Nif")] Cliente empleado)
         {
             if (id != empleado.Id)
             {
