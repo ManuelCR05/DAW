@@ -1,0 +1,110 @@
+﻿@* @model IEnumerable<PracticaIntegradora.Models.Producto> *@
+@model ViewEscaparate
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Escaparate</h1>
+@* 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Imagen
+            </th>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Texto
+            </th>
+            <th>
+                Precio
+            </th>
+            <th>
+                Escaparate
+            </th>
+            <th>
+                Categoría
+            </th>
+            <th>
+                Instalador
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var nombreIMG = "";
+                        var altMessage = "imagen no encontrada";
+                        if (item.Imagen != null)
+                        {
+                            nombreIMG = item.Imagen;
+                            altMessage = "";
+                        }
+                    }
+                    <img src="@nombreIMG" alt="@altMessage" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Escaparate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+                </td>
+                <td>
+                    @{
+                        var nombreArchivo = System.IO.Path.GetFileName(item.instalador);
+                    }
+                    <span id="fileName">@nombreArchivo</span>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+*@
+
+<div class="row">
+    <div class="col-2">
+        @foreach (var categoria in Model.Categorias)
+        {
+            <div>
+                <a asp-action="Index" asp-route-IdCategoria="@categoria.Id">@categoria.Descripcion</a>
+            </div>
+        }
+    </div>
+    <div class="col-10">
+        <div class="row">
+            @foreach (var producto in Model.Productos)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@producto.Imagen" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@producto.Descripcion</h5>
+                        <p class="card-text">@producto.Precio €</p>
+                        <a href="#" class="btn btn-primary">Añadir al Carrito</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
