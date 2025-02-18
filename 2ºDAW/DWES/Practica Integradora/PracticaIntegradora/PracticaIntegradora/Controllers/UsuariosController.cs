@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PracticaIntegradora.Areas.Identity.Pages.Account;
 using PracticaIntegradora.Data;
 using PracticaIntegradora.Models;
@@ -20,9 +21,18 @@ namespace PracticaIntegradora.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string strCadenaBusqueda)
         {
-            var usuarios = from user in _context.Users
+            ViewData["BusquedaActual"] = strCadenaBusqueda;
+
+            var usuariosQuery = _context.Users.AsQueryable();
+
+            if (!String.IsNullOrEmpty(strCadenaBusqueda))
+            {
+                usuariosQuery = usuariosQuery.Where(c => c.UserName.Contains(strCadenaBusqueda));
+            }
+
+            var usuarios = from user in usuariosQuery
                            join userRoles in _context.UserRoles on user.Id equals userRoles.UserId
                            join role in _context.Roles on userRoles.RoleId equals role.Id
                            select new ViewUsuarioConRol
@@ -31,6 +41,7 @@ namespace PracticaIntegradora.Controllers
                                NombreUsuario = user.UserName,
                                RolDeUsuario = role.Name
                            };
+
             return View(usuarios.ToList());
         }
 

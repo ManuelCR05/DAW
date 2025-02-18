@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PracticaIntegradora.Data;
 using PracticaIntegradora.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace PracticaIntegradora.Controllers
 {

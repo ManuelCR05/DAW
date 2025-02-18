@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PracticaIntegradora.Data;
 using PracticaIntegradora.Models;
+using System.Security.Claims;
 
 namespace PracticaIntegradora.Controllers
 {
@@ -71,34 +72,61 @@ namespace PracticaIntegradora.Controllers
             if (string.IsNullOrEmpty(carritoIds)) return RedirectToAction("Index");
 
             List<int> carrito = carritoIds.Split(',').Select(int.Parse).ToList();
-            carrito.Remove(id); // Eliminar un solo elemento con ese ID
+
+            carrito.RemoveAll(x => x == id);
 
             HttpContext.Session.SetString("Carrito", string.Join(",", carrito));
+
             return RedirectToAction("Index");
         }
 
-        public IActionResult ConfirmarCompra(int clienteId)
+        public IActionResult ConfirmarCompra()
         {
-            var carritoIds = HttpContext.Session.GetString("Carrito");
-            if (string.IsNullOrEmpty(carritoIds)) return RedirectToAction("Index");
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
-            var ids = carritoIds.Split(',').Select(int.Parse).ToList();
-            var productos = _context.Productos.Where(p => ids.Contains(p.Id)).ToList();
+            var cliente = _context.Clientes.FirstOrDefault(c => c.Email == userEmail);
+
+            var clienteId = cliente.Id;
+
+            var carritoIdsString = HttpContext.Session.GetString("Carrito");
+            if (string.IsNullOrEmpty(carritoIdsString))
+            {
+                return Content("El carrito está vacío.");
+            }
+
+            var productoIds = carritoIdsString.Split(',').Select(int.Parse).ToList();
+
+            var estadoConfirmado = _context.Estados.FirstOrDefault(e => e.Descripcion == "Confirmado");
+            if (estadoConfirmado == null)
+            {
+                return Content("Error: Estado 'Confirmado' no encontrado.");
+            }
 
             var nuevoPedido = new Pedido
             {
                 Fecha = DateTime.Now,
                 Confirmado = DateTime.Now,
                 ClienteId = clienteId,
-                EstadoId = 1,
-                Detalles = productos.Select(p => new Detalle
-                {
-                    ProductoId = p.Id,
-                    Cantidad = ids.Count(id => id == p.Id),
-                    Precio = p.Precio,
-                    Descuento = 0
-                }).ToList()
+                EstadoId = estadoConfirmado.Id,
+                Cliente = cliente,
+                Estado = estadoConfirmado,
+                Detalles = new List<Detalle>()
             };
+
+            var productos = _context.Productos.Where(p => productoIds.Contains(p.Id)).ToList();
+
+            foreach (var producto in productos)
+            {
+                int cantidad = productoIds.Count(id => id == producto.Id);
+
+                nuevoPedido.Detalles.Add(new Detalle
+                {
+                    ProductoId = producto.Id,
+                    Cantidad = cantidad,
+                    Precio = producto.Precio,
+                    Descuento = 0
+                });
+            }
 
             _context.Pedidos.Add(nuevoPedido);
             _context.SaveChanges();
@@ -107,5 +135,6 @@ namespace PracticaIntegradora.Controllers
 
             return RedirectToAction("PedidoConfirmado", new { pedidoId = nuevoPedido.Id });
         }
+
     }
 }
