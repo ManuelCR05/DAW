@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,8 @@ namespace PracticaIntegradora.Controllers
             var pedido = await _context.Pedidos
                 .Include(p => p.Cliente)
                 .Include(p => p.Estado)
+                .Include(p => p.Detalles)
+                .ThenInclude(d => d.Producto)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pedido == null)
             {
@@ -52,6 +55,26 @@ namespace PracticaIntegradora.Controllers
 
             return View(pedido);
         }
+
+
+        // GET: Pedidos/MisPedidos
+        public async Task<IActionResult> MisPedidos()
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            var cliente = _context.Clientes.FirstOrDefault(c => c.Email == userEmail);
+
+            var clienteId = cliente.Id;
+
+            var pedidos = _context.Pedidos
+                .Include(p => p.Cliente)
+                .Include(p => p.Estado)
+                .Where(p => p.Cliente.Id == clienteId)
+                .AsQueryable();
+
+            return View("MisPedidos", await pedidos.ToListAsync());
+        }
+
 
         // GET: Pedidos/Create
         public IActionResult Create()

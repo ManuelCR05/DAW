@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PracticaIntegradora.Data;
 using PracticaIntegradora.Models;
 using System.Security.Claims;
@@ -80,6 +81,7 @@ namespace PracticaIntegradora.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Usuario")]
         public IActionResult ConfirmarCompra()
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);

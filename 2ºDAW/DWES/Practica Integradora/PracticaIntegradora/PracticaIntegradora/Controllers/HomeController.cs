@@ -30,7 +30,7 @@ namespace PracticaIntegradora.Controllers
             }
 
 
-            return View();
+            return RedirectToAction("Index", "Escaparate");
         }
 
         public IActionResult Privacy()
