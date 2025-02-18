@@ -25,7 +25,6 @@ namespace PracticaIntegradora.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Email,Telefono,Direccion,Poblacion,CodigoPostal,Nif")] Cliente empleado)
         {
-            // Asignar el Email del usuario actual
             empleado.Email = User.Identity.Name;
             if (ModelState.IsValid)
             {
@@ -39,7 +38,6 @@ namespace PracticaIntegradora.Controllers
         // GET: MisDatos/Edit
         public async Task<IActionResult> Edit()
         {
-            // Se seleccionan los datos del empleado correspondiente al usuario actual
             string? emailUsuario = User.Identity.Name;
             Cliente? empleado = await _context.Clientes
             .Where(e => e.Email == emailUsuario)

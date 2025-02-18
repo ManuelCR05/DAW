@@ -1,5 +1,4 @@
-﻿@* @model IEnumerable<PracticaIntegradora.Models.Pedido> *@
-@model PaginatedList<PracticaIntegradora.Models.Pedido>
+﻿@model PaginatedList<PracticaIntegradora.Models.Pedido>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,39 +14,30 @@
         <tr>
             <th>
                 Fecha
-                @* @Html.DisplayNameFor(model => model.Fecha) *@
             </th>
             <th>
                 Confirmado
-                @* @Html.DisplayNameFor(model => model.Confirmado) *@
             </th>
             <th>
                 Preparado
-                @* @Html.DisplayNameFor(model => model.Preparado) *@
             </th>
             <th>
                 Enviado
-                @* @Html.DisplayNameFor(model => model.Enviado) *@
             </th>
             <th>
                 Cobrado
-               @*  @Html.DisplayNameFor(model => model.Cobrado) *@
             </th>
             <th>
                 Devuelto
-               @*  @Html.DisplayNameFor(model => model.Devuelto) *@
             </th>
             <th>
                 Anulado
-                @* @Html.DisplayNameFor(model => model.Anulado) *@
             </th>
             <th>
                 Cliente
-                @* @Html.DisplayNameFor(model => model.Cliente) *@
             </th>
             <th>
                 Estado
-                @* @Html.DisplayNameFor(model => model.Estado) *@
             </th>
             <th></th>
         </tr>
@@ -83,9 +73,9 @@
                 @Html.DisplayFor(modelItem => item.Estado.Descripcion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
             </td>
         </tr>
 }

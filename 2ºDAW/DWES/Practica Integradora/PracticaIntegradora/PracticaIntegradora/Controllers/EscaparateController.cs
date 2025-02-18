@@ -23,8 +23,6 @@ namespace PracticaIntegradora.Controllers
                 Categorias = _context.Categorias.ToList()
             };
 
-            //var productos = _context.Productos.Where(producto => producto.Escaparate == true);
-
             return View(viewProductosCategorias);
         }
     }

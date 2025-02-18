@@ -22,13 +22,17 @@ namespace PracticaIntegradora.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index(int? pageNumber)
+        public async Task<IActionResult> Index(int? pageNumber, int? idCategoria)
         {
-            //var mvcTiendaContexto = _context.Productos.Include(p => p.Categoria);
-            //return View(await mvcTiendaContexto.ToListAsync());
+            var productos = _context.Productos.Include(p => p.Categoria).AsQueryable();
 
-            var productos = from s in _context.Productos.Include(p => p.Categoria)
-                            select s;
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", 
+                     "Descripcion", idCategoria);
+
+            if (idCategoria.HasValue)
+            {
+                productos = productos.Where(x => x.CategoriaId == idCategoria);
+            }
 
             int pageSize = 5;
             return View(await PaginatedList<Producto>.CreateAsync(productos.AsNoTracking(),

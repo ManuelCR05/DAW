@@ -24,9 +24,6 @@ namespace PracticaIntegradora.Controllers
         // GET: Pedidos
         public async Task<IActionResult> Index(int? pageNumber)
         {
-            //var mvcTiendaContexto = _context.Pedidos.Include(p => p.Cliente).Include(p => p.Estado);
-            //return View(await mvcTiendaContexto.ToListAsync());
-
             var pedidos = from s in _context.Pedidos.Include(p => p.Cliente).Include(p => p.Estado)
                           select s;
 

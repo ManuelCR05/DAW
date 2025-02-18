@@ -1,5 +1,4 @@
-﻿@* @model IEnumerable<PracticaIntegradora.Models.Estado> *@
-@model PaginatedList<PracticaIntegradora.Models.Estado>
+﻿@model PaginatedList<PracticaIntegradora.Models.Estado>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,7 +14,6 @@
         <tr>
             <th>
                 Descripción
-               @*  @Html.DisplayNameFor(model => model.Descripcion) *@
             </th>
             <th></th>
         </tr>
@@ -27,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
             </td>
         </tr>
 }

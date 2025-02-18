@@ -57,14 +57,12 @@ namespace PracticaIntegradora.Controllers
         public async Task<IActionResult> Create([Bind("Email,Password")]
             RegisterModel.InputModel model)
         {
-            // Se crea el nuevo usuario
             var user = new IdentityUser();
             user.UserName = model.Email;
             user.Email = model.Email;
             string usuarioPWD = model.Password;
             var result = await _userManager.CreateAsync(user, usuarioPWD);
 
-            // Se asigna el rol de "Administrador" al usuario
             if (result.Succeeded)
             {
                 var result1 = await _userManager.AddToRoleAsync(user, "Administrador");

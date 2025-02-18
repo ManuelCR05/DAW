@@ -1,5 +1,4 @@
-﻿@* @model IEnumerable<PracticaIntegradora.Models.Producto> *@
-@model ViewEscaparate
+﻿@model ViewEscaparate
 
 @{
     ViewData["Title"] = "Index";
@@ -7,81 +6,6 @@
 }
 
 <h1>Escaparate</h1>
-@* 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Imagen
-            </th>
-            <th>
-                Descripción
-            </th>
-            <th>
-                Texto
-            </th>
-            <th>
-                Precio
-            </th>
-            <th>
-                Escaparate
-            </th>
-            <th>
-                Categoría
-            </th>
-            <th>
-                Instalador
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @{
-                        var nombreIMG = "";
-                        var altMessage = "imagen no encontrada";
-                        if (item.Imagen != null)
-                        {
-                            nombreIMG = item.Imagen;
-                            altMessage = "";
-                        }
-                    }
-                    <img src="@nombreIMG" alt="@altMessage" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Texto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Precio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Escaparate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
-                </td>
-                <td>
-                    @{
-                        var nombreArchivo = System.IO.Path.GetFileName(item.instalador);
-                    }
-                    <span id="fileName">@nombreArchivo</span>
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-*@
 
 <div class="row">
     <div class="col-2">
