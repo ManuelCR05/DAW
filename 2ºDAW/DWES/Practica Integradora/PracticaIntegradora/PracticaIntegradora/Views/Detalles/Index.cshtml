@@ -6,9 +6,27 @@
 
 <h1>Detalles</h1>
 
-<p>
+@* <p>
     <a asp-action="Create">Crear un nuevo Detalle</a>
-</p>
+</p> *@
+
+<form asp-action="Index" method="get">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-md">
+                <label class="control-label">Número de Pedido:</label>
+                <select name="idPedido" asp-items="ViewBag.PedidoId" class="form-control">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+            <div class="col-md align-self-end">
+                <input type="submit" value="Buscar" class="btn btn-default" /> |
+                <a asp-action="Index" class="btn btn-default">Lista completa</a>
+            </div>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

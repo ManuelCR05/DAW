@@ -22,10 +22,19 @@ namespace PracticaIntegradora.Controllers
         }
 
         // GET: Detalles
-        public async Task<IActionResult> Index(int? pageNumber)
+        public async Task<IActionResult> Index(int? pageNumber, int? idPedido)
         {
-            var detalles = from s in _context.Detalles.Include(d => d.Pedido).Include(d => d.Producto)
-                           select s;
+            var detallesQuery = _context.Detalles.AsQueryable();
+
+            ViewData["PedidoId"] = new SelectList(_context.Pedidos, "Id", "Id", idPedido);
+
+
+            if (idPedido.HasValue)
+            {
+                detallesQuery = detallesQuery.Where(d => d.PedidoId == idPedido);
+            }
+
+            var detalles = detallesQuery.Include(d => d.Pedido).Include(d => d.Producto);
 
             int pageSize = 10;
             return View(await PaginatedList<Detalle>.CreateAsync(detalles.AsNoTracking(),
