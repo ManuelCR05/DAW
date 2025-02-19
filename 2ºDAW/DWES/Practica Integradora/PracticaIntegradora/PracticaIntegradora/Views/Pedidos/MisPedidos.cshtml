@@ -1,49 +1,43 @@
-﻿@model PracticaIntegradora.Models.Pedido
+﻿@model IEnumerable<PracticaIntegradora.Models.Pedido>
 
 @{
-    ViewData["Title"] = "Detalles del Pedido";
+    ViewData["Title"] = "MisPedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles del Pedido</h2>
+<h1>MisPedidos</h1>
 
-<div>
-    <h4>Pedido #@Model.Id</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Cliente:</dt>
-        <dd class="col-sm-10">@Model.Cliente.Nombre</dd>
-
-        <dt class="col-sm-2">Estado:</dt>
-        <dd class="col-sm-10">@Model.Estado.Descripcion</dd>
-
-        <dt class="col-sm-2">Fecha:</dt>
-        <dd class="col-sm-10">@Model.Fecha.ToShortDateString()</dd>
-    </dl>
-</div>
-
-<h3>Detalles del Pedido</h3>
 <table class="table">
     <thead>
         <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Descuento</th>
-            <th>Subtotal</th>
+            <th>Número de Pedido</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var detalle in Model.Detalles)
+        @foreach (var pedido in Model)
         {
             <tr>
-                <td>@detalle.Producto.Descripcion</td>
-                <td>@detalle.Cantidad</td>
-                <td>@detalle.Precio.ToString("C")</td>
-                <td>@detalle.Descuento.ToString("C")</td>
-                <td>@((detalle.Precio * detalle.Cantidad - detalle.Descuento).ToString("C"))</td>
+                <td>@pedido.Id</td>
+                <td>@pedido.Fecha.ToShortDateString()</td>
+                <td>@pedido.Estado.Descripcion</td>
+                <td>
+                    <a asp-action="DetallesPedido" asp-route-id="@pedido.Id" class="btn btn-primary">Ver Detalles</a>
+                    @if (pedido.Estado.Descripcion == "Confirmado")
+                    {
+                        <a asp-action="CancelarPedido" asp-route-id="@pedido.Id" class="btn btn-danger"
+                        onclick="return confirm('¿Estás seguro de cancelar este pedido?');">Cancelar</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary"
+                           onclick="return confirm('¿Estás seguro de cancelar este pedido?');"
+                           style="pointer-events: none; text-decoration: none;">Cancelar</a>
+                    }
+                </td>
             </tr>
         }
     </tbody>
 </table>
-
-<a asp-action="Index" class="btn btn-secondary">Volver</a>

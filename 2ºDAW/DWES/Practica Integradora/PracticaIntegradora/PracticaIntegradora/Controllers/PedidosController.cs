@@ -12,7 +12,6 @@ using PracticaIntegradora.Models;
 
 namespace PracticaIntegradora.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class PedidosController : Controller
     {
         private readonly MvcTiendaContexto _context;
@@ -22,6 +21,7 @@ namespace PracticaIntegradora.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Pedidos
         public async Task<IActionResult> Index(int? pageNumber)
         {
@@ -33,7 +33,7 @@ namespace PracticaIntegradora.Controllers
                 pageNumber ?? 1, pageSize));
         }
 
-
+        [Authorize(Roles = "Administrador")]
         // GET: Pedidos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -56,26 +56,87 @@ namespace PracticaIntegradora.Controllers
             return View(pedido);
         }
 
-
         // GET: Pedidos/MisPedidos
+        [Authorize(Roles = "Usuario")]
         public async Task<IActionResult> MisPedidos()
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
 
-            var cliente = _context.Clientes.FirstOrDefault(c => c.Email == userEmail);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Email == userEmail);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
 
-            var clienteId = cliente.Id;
-
-            var pedidos = _context.Pedidos
-                .Include(p => p.Cliente)
+            var pedidos = await _context.Pedidos
                 .Include(p => p.Estado)
-                .Where(p => p.Cliente.Id == clienteId)
-                .AsQueryable();
+                .Include(p => p.Detalles)
+                    .ThenInclude(d => d.Producto)
+                .Where(p => p.ClienteId == cliente.Id)
+                .ToListAsync();
 
-            return View("MisPedidos", await pedidos.ToListAsync());
+            return View(pedidos);
+        }
+
+        [Authorize(Roles = "Usuario")]
+        public async Task<IActionResult> DetallesPedido(int id)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Email == userEmail);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            var pedido = await _context.Pedidos
+                .Include(p => p.Estado)
+                .Include(p => p.Detalles)
+                    .ThenInclude(d => d.Producto)
+                .FirstOrDefaultAsync(p => p.Id == id && p.ClienteId == cliente.Id);
+
+            if (pedido == null)
+            {
+                return NotFound();
+            }
+
+            return View(pedido);
         }
 
 
+        [Authorize(Roles = "Usuario")]
+        public async Task<IActionResult> CancelarPedido(int id)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.Email == userEmail);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            var pedido = await _context.Pedidos
+                .FirstOrDefaultAsync(p => p.Id == id && p.ClienteId == cliente.Id);
+
+            if (pedido == null)
+            {
+                return BadRequest("El pedido no puede ser cancelado.");
+            }
+
+            var estadoCancelado = await _context.Estados.FirstOrDefaultAsync(e => e.Descripcion == "Anulado");
+            if (estadoCancelado == null)
+            {
+                return BadRequest("Estado de cancelación no encontrado.");
+            }
+
+            pedido.EstadoId = estadoCancelado.Id;
+            _context.Update(pedido);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(MisPedidos));
+        }
+
+
+
+        [Authorize(Roles = "Administrador")]
         // GET: Pedidos/Create
         public IActionResult Create()
         {
@@ -102,6 +163,7 @@ namespace PracticaIntegradora.Controllers
             return View(pedido);
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Pedidos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -120,6 +182,7 @@ namespace PracticaIntegradora.Controllers
             return View(pedido);
         }
 
+        [Authorize(Roles = "Administrador")]
         // POST: Pedidos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -157,6 +220,7 @@ namespace PracticaIntegradora.Controllers
             return View(pedido);
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Pedidos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -177,6 +241,7 @@ namespace PracticaIntegradora.Controllers
             return View(pedido);
         }
 
+        [Authorize(Roles = "Administrador")]
         // POST: Pedidos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

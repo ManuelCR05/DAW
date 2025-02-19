@@ -1,0 +1,37 @@
+﻿@model PracticaIntegradora.Models.Pedido
+
+@{
+    ViewData["Title"] = "DetallesPedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DetallesPedido</h1>
+
+<h2>Pedido #@Model.Id</h2>
+<p>Fecha: @Model.Fecha.ToShortDateString()</p>
+<p>Estado: @Model.Estado.Descripcion</p>
+
+<h3>Productos del Pedido</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detalle in Model.Detalles)
+        {
+            <tr>
+                <td>@detalle.Producto.Descripcion</td>
+                <td>@detalle.Cantidad</td>
+                <td>@detalle.Precio.ToString("C")</td>
+                <td>@((detalle.Precio * detalle.Cantidad).ToString("C"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="MisPedidos" class="btn btn-secondary">Volver</a>

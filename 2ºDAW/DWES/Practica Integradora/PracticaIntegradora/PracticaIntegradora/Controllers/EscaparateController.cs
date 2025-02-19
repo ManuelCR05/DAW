@@ -16,12 +16,25 @@ namespace PracticaIntegradora.Controllers
 
         public IActionResult Index(int? IdCategoria)
         {
-            var viewProductosCategorias = new ViewEscaparate
+            var viewProductosCategorias = new ViewEscaparate();
+
+            if (IdCategoria == null || IdCategoria == 0)
             {
-                Productos = _context.Productos.Where(producto => producto.Escaparate == true && 
-                                                    (!IdCategoria.HasValue || producto.Categoria.Id == IdCategoria)).ToList(),
-                Categorias = _context.Categorias.ToList()
-            };
+                viewProductosCategorias = new ViewEscaparate
+                {
+                    Productos = _context.Productos.Where(producto => producto.Escaparate == true &&
+                                                        (!IdCategoria.HasValue || producto.Categoria.Id == IdCategoria)).ToList(),
+                    Categorias = _context.Categorias.ToList()
+                };
+            }
+            else
+            {
+                viewProductosCategorias = new ViewEscaparate
+                {
+                    Productos = _context.Productos.Where(producto => !IdCategoria.HasValue || producto.Categoria.Id == IdCategoria).ToList(),
+                    Categorias = _context.Categorias.ToList()
+                };
+            }
 
             return View(viewProductosCategorias);
         }
