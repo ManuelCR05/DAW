@@ -58,13 +58,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @{
-                    var nombreIMG = "";
-                    var altMessage = "imagen no encontrada";
-                    if (item.Imagen != null)
-                    {
-                        nombreIMG = item.Imagen;
-                        altMessage = "";
+                    @{
+                        var nombreIMG = "";
+                        var altMessage = "imagen no encontrada";
+                        if (item.Imagen != null)
+                        {
+                            nombreIMG = item.Imagen;
+                            Console.WriteLine("----------------");
+                            Console.WriteLine(nombreIMG);
+                            Console.WriteLine("----------------");
+                            altMessage = "";
                     }
                 }
                 <img src="@nombreIMG" alt="@altMessage" style="width:50px; height:50px"/>

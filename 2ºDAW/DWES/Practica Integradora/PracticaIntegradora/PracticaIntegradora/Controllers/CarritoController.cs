@@ -135,7 +135,7 @@ namespace PracticaIntegradora.Controllers
 
             HttpContext.Session.Remove("Carrito");
 
-            return RedirectToAction("PedidoConfirmado", new { pedidoId = nuevoPedido.Id });
+            return RedirectToAction("DetallesPedido", "Pedidos", new { id = nuevoPedido.Id });
         }
 
     }

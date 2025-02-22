@@ -13,6 +13,13 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label class="control-label">Imagen</label>
+                <br />
+                <img src="/img/general2.png" id="img" style="width:80px; height:80px;" />
+                <input type="file" id="imgInput" accept=".png" style="display: none;" />
+                <input asp-for="Imagen" value="/img/general2.png" class="form-control" id="rutaImg" style="display: none;" />
+            </div>
+            <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
@@ -34,11 +41,6 @@
                     <option value="false">False</option>
                 </select>
                 <span asp-validation-for="Escaparate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imagen" class="control-label"></label>
-                <input asp-for="Imagen" class="form-control" />
-                <span asp-validation-for="Imagen" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Instalador</label>
@@ -70,5 +72,17 @@
         let file = event.target.files[0];
         if (file)
             document.getElementById("file").value = "/downloads/" + file.name;
+    });
+
+    document.getElementById("img").addEventListener("click", () => {
+        document.getElementById("imgInput").click();
+    });
+
+    document.getElementById("imgInput").addEventListener("change", event => {
+        let file = event.target.files[0];
+        if (file) {
+            document.getElementById("rutaImg").value = "/img/" + file.name;
+            document.getElementById("img").src = "/img/" + file.name;
+        }
     });
 </script>

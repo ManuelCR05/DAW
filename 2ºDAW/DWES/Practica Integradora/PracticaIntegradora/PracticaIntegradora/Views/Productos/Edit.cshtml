@@ -14,9 +14,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Imagen" class="control-label"></label>
-                <input asp-for="Imagen" class="form-control" />
-                <span asp-validation-for="Imagen" class="text-danger"></span>
+                @{
+                    var nombreImagen = System.IO.Path.GetFileName(Model.Imagen);
+                }
+                <label class="control-label">Imagen</label>
+                <br />
+                <img id="img" src="@Model.Imagen" style="width:80px; height:80px;" />
+                <input type="file" id="imgInput" accept=".png" style="display: none;" />
+                <input asp-for="Imagen" class="form-control" id="rutaImg" style="display: none;" />
             </div>
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
@@ -52,7 +57,7 @@
                 }
                 <label class="control-label">Instalador</label>
                 <br />
-                <img id="fileIcon" src="/img/General/1.jpg" />
+                <img id="fileIcon" src="/img/general1.jpg" />
                 <span id="fileName">@nombreArchivo</span>
                 <input type="file" id="fileInput" accept=".exe" style="display: none;"/>
                 <input asp-for="instalador" class="form-control" id="file" style="display: none;" />
@@ -88,6 +93,18 @@
         {
             document.getElementById("file").value = "/downloads/" + file.name;
             document.getElementById("fileName").textContent = file.name;
+        }
+    });
+
+    document.getElementById("img").addEventListener("click", () => {
+        document.getElementById("imgInput").click();
+    });
+
+    document.getElementById("imgInput").addEventListener("change", event => {
+        let file = event.target.files[0];
+        if (file) { 
+            document.getElementById("rutaImg").value = "/img/" + file.name;
+            document.getElementById("img").src = "/img/" + file.name;
         }
     });
 </script>
