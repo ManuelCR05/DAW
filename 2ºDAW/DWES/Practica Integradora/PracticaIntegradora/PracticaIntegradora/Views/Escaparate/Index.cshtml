@@ -5,30 +5,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Escaparate</h1>
+<h1 class="text-center my-4">Escaparate</h1>
 
 <div class="row">
-    <div class="col-2">
-        @foreach (var categoria in Model.Categorias)
-        {
-            <div>
-                <a asp-action="Index" asp-route-IdCategoria="@categoria.Id">@categoria.Descripcion</a>
-            </div>
-        }
-        <div>
-            <a asp-action="Index" asp-route-IdCategoria="">Todos</a>
+    <div class="col-md-3">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action active">Categorías</a>
+            @foreach (var categoria in Model.Categorias)
+            {
+                <a class="list-group-item list-group-item-action" asp-action="Index" asp-route-IdCategoria="@categoria.Id">
+                    @categoria.Descripcion
+                </a>
+            }
+            <a class="list-group-item list-group-item-action" asp-action="Index" asp-route-IdCategoria="">Todos</a>
         </div>
     </div>
-    <div class="col-10">
-        <div class="row">
+
+    <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach (var producto in Model.Productos)
             {
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@producto.Imagen" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@producto.Descripcion</h5>
-                        <p class="card-text">@producto.Precio €</p>
-                        <a class="btn btn-primary" asp-action="Agregar" asp-controller="Carrito" asp-route-id="@producto.Id">Añadir al Carrito</a>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@producto.Imagen" class="card-img-top" alt="Imagen de @producto.Descripcion">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@producto.Descripcion</h5>
+                            <p class="card-text fw-bold text-primary">@producto.Precio €</p>
+                            <a class="btn btn-outline-primary w-100" asp-action="Agregar" asp-controller="Carrito" asp-route-id="@producto.Id">
+                                <i class="bi bi-cart-plus"></i> Añadir al Carrito
+                            </a>
+                        </div>
                     </div>
                 </div>
             }
