@@ -1,32 +1,29 @@
 ﻿@model PracticaIntegradora.Models.Estado
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Estado";
 }
 
-<h1>Edición del Estado</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Editar Estado</h1>
 
-<h4>Estado</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="card shadow-sm p-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="Descripcion" class="form-label">Descripción</label>
                 <input asp-for="Descripcion" class="form-control" />
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Volver a la Lista</a>
 </div>
 
 @section Scripts {

@@ -1,54 +1,57 @@
 ﻿@model PracticaIntegradora.Models.Detalle
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Detalle";
 }
 
-<h1>Edición del Detalle</h1>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Editar Detalle</h1>
 
-<h4>Detalle</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="card shadow-sm p-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="PedidoId" class="control-label"></label>
-                <select asp-for="PedidoId" class="form-control" asp-items="ViewBag.PedidoId"></select>
+
+            <div class="mb-3">
+                <label asp-for="PedidoId" class="form-label">Pedido</label>
+                <select asp-for="PedidoId" class="form-select" asp-items="ViewBag.PedidoId"></select>
                 <span asp-validation-for="PedidoId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ProductoId" class="control-label"></label>
-                <select asp-for="ProductoId" class="form-control" asp-items="ViewBag.ProductoId"></select>
+
+            <div class="mb-3">
+                <label asp-for="ProductoId" class="form-label">Producto</label>
+                <select asp-for="ProductoId" class="form-select" asp-items="ViewBag.ProductoId"></select>
                 <span asp-validation-for="ProductoId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                <input asp-for="Cantidad" class="form-control" type="number" min="1" />
                 <span asp-validation-for="Cantidad" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Precio" class="form-label">Precio</label>
+                <input asp-for="Precio" class="form-control" type="number" step="0.01" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Descuento" class="control-label"></label>
-                <input asp-for="Descuento" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Descuento" class="form-label">Descuento</label>
+                <input asp-for="Descuento" class="form-control" type="number" step="0.01" />
                 <span asp-validation-for="Descuento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver a la Lista</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

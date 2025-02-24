@@ -1,4 +1,4 @@
-﻿@model PracticaIntegradora.Models.Producto
+﻿@* @model PracticaIntegradora.Models.Producto
 
 @{
     ViewData["Title"] = "Create";
@@ -72,6 +72,98 @@
         let file = event.target.files[0];
         if (file)
             document.getElementById("file").value = "/downloads/" + file.name;
+    });
+
+    document.getElementById("img").addEventListener("click", () => {
+        document.getElementById("imgInput").click();
+    });
+
+    document.getElementById("imgInput").addEventListener("change", event => {
+        let file = event.target.files[0];
+        if (file) {
+            document.getElementById("rutaImg").value = "/img/" + file.name;
+            document.getElementById("img").src = "/img/" + file.name;
+        }
+    });
+</script> *@
+
+@model PracticaIntegradora.Models.Producto
+
+@{
+    ViewData["Title"] = "Crear Producto";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Crear Nuevo Producto</h1>
+
+    <div class="card shadow-sm p-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Imagen</label>
+                <br />
+                <img src="/img/general2.png" id="img" style="width: 80px; height: 80px;" />
+                <input type="file" id="imgInput" accept=".png" style="display: none;" />
+                <input asp-for="Imagen" value="/img/general2.png" class="form-control" id="rutaImg" style="display: none;" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descripcion" class="form-label">Descripción</label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Texto" class="form-label">Texto</label>
+                <input asp-for="Texto" class="form-control" />
+                <span asp-validation-for="Texto" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PrecioCadena" class="form-label">Precio</label>
+                <input asp-for="PrecioCadena" class="form-control" />
+                <span asp-validation-for="PrecioCadena" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Escaparate" class="form-label">Escaparate</label>
+                <select asp-for="Escaparate" class="form-control">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+                <span asp-validation-for="Escaparate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Instalador</label>
+                <br />
+                <input type="file" id="fileInput" accept=".exe" />
+                <input asp-for="instalador" class="form-control" id="file" style="display: none;" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoriaId" class="form-label">Categoría</label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    document.getElementById("fileInput").addEventListener("change", event => {
+        let file = event.target.files[0];
+        if (file) document.getElementById("file").value = "/downloads/" + file.name;
     });
 
     document.getElementById("img").addEventListener("click", () => {
